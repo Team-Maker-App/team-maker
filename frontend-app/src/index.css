@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
+
+@layer base {
+  .bg-teammaker {
+    @apply bg-gradient-to-b from-primary to-primaryDark;
+  }
+}
+
 @tailwind utilities;

@@ -1,6 +1,4 @@
-import TeamFilter from "./components/TeamFilter";
-
-function App() {
+function Footer() {
   return (
     <div className="w-full h-screen bg-primaryDark">
       <div className="container mx-auto">
@@ -10,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+export default Footer;

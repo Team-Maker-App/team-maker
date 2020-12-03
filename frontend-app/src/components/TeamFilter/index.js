@@ -24,15 +24,15 @@ const TeamFilter = () => {
 */
 
   return (
-    <div className="flex flex-col items-center h-full bg-purple-700 overflow-hidden p-6">
-      <Logo dark className="w-2/3 my-12" />
+    <div className="flex flex-col items-center h-full bg-teammaker p-6">
+      <Logo dark className="w-2/3 my-12 max-w-xs" />
       <textarea
         className="p-4 h-80 w-full"
         onChange={(e) => setValue(e.target.value)}
         rows="15"
         placeholder={placeholder}
       />
-      <ol>
+      <ol className="text-white">
         {filterPlayers(value).map((player, i) => (
           <li key={i} style={{ textTransform: "capitalize" }}>
             {player}
