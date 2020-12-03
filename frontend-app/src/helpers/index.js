@@ -10,10 +10,16 @@ export function filterPlayers(str) {
     }
 
     m.forEach((match) => {
-      players.push(match.toLowerCase());
+      const cleanedPlayerName = match.toLowerCase().trim();
+      players.push(cleanedPlayerName);
     });
   }
 
   const duplicatesRemoved = new Set(players);
+  console.log([...duplicatesRemoved]);
   return [...duplicatesRemoved];
+}
+
+export function randomizePlayers(players) {
+  return players;
 }
