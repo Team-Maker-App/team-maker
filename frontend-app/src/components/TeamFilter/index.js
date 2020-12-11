@@ -34,7 +34,7 @@ const TeamFilter = () => {
       <div className="w-full relative">
         <textarea
           style={{ resize: "none" }}
-          className="p-4 h-80 w-full"
+          className="p-4 h-96 w-full"
           onChange={(e) => setValue(e.target.value)}
           rows="15"
           value={value}
@@ -45,12 +45,12 @@ const TeamFilter = () => {
       <div class="flex w-full items-center h-12 gap-2">
         <input
           type="text"
-          class="h-full p-2 block w-full shadow-sm focus:ring-light-blue-500 focus:border-light-blue-500 sm:text-sm border-gray-300 rounded-md"
+          class="h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
           placeholder="Agregar jugador"
         />
         <button
           type="button"
-          class="h-full bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-light-blue-500"
+          class="h-full bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           <svg
             class="h-5 w-5"
@@ -67,10 +67,18 @@ const TeamFilter = () => {
           </svg>
         </button>
       </div>
-      <div className="flex flex-wrap text-white gap-1">
+      <div className="flex flex-wrap text-white gap-2">
         {filterPlayers(value).map((player, i) => (
           <Badge key={i} text={player} />
         ))}
+      </div>
+      <div class="flex justify-end w-full">
+        <button
+          type="submit"
+          class="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
+        >
+          Crear equipos
+        </button>
       </div>
     </div>
   );
@@ -80,7 +88,7 @@ const Badge = ({ text }) => {
   return (
     <span
       style={{ textTransform: "capitalize" }}
-      class="inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700"
+      class="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700"
     >
       {text}
       <button
