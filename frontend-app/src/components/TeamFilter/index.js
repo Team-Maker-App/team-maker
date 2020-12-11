@@ -4,7 +4,8 @@ import Logo from "../Logo";
 import Button from "../Button";
 
 const TeamFilter = () => {
-  const [value, setValue] = useState("");
+  const [players, setPlayers] = useState([]);
+  const [player, setPlayer] = useState("");
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
   `;
@@ -24,8 +25,13 @@ const TeamFilter = () => {
   12 mono
 */
 
+  const addPlayer = () => {
+    const filteredPlayers = filterPlayers(players);
+    setPlayers(filterPlayers([...filteredPlayers, player]));
+  };
+
   const handlePaste = () => {
-    navigator.clipboard.readText().then((clipText) => setValue(clipText));
+    navigator.clipboard.readText().then((clipText) => setPlayers(clipText));
   };
 
   return (
@@ -35,9 +41,9 @@ const TeamFilter = () => {
         <textarea
           style={{ resize: "none" }}
           className="p-4 h-96 w-full"
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => setPlayers(e.target.value)}
           rows="15"
-          value={value}
+          value={players}
           placeholder={placeholder}
         />
         <Button onClick={() => handlePaste()} />
@@ -47,9 +53,12 @@ const TeamFilter = () => {
           type="text"
           class="h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 rounded-md"
           placeholder="Agregar jugador"
+          onChange={(event) => setPlayer(event.target.value)}
+          value={player}
         />
         <button
           type="button"
+          onClick={() => addPlayer()}
           class="h-full bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
           <svg
@@ -67,12 +76,18 @@ const TeamFilter = () => {
           </svg>
         </button>
       </div>
-      <div className="flex flex-wrap text-white gap-2">
-        {filterPlayers(value).map((player, i) => (
-          <Badge key={i} text={player} />
-        ))}
+      <div className="flex items-center mt-4">
+        <p className="text-white text-6xl pr-2 mr-2 border-r border-white">
+          {filterPlayers(players).length}
+        </p>
+        <div className="flex flex-wrap text-white gap-2">
+          {filterPlayers(players).map((player, i) => (
+            <Badge key={i} text={player} />
+          ))}
+        </div>
       </div>
-      <div class="flex justify-end w-full">
+
+      <div class="flex justify-end w-full mt-auto">
         <button
           type="submit"
           class="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
