@@ -1,7 +1,7 @@
 export function filterPlayers(str) {
   const regex = /[a-zÀ-ÿ\s]+/gi;
 
-  const players = new Array();
+  const players = [];
   let m;
 
   while ((m = regex.exec(str)) !== null) {
@@ -16,7 +16,6 @@ export function filterPlayers(str) {
   }
 
   const duplicatesRemoved = new Set(players);
-  console.log([...duplicatesRemoved]);
   return [...duplicatesRemoved];
 }
 

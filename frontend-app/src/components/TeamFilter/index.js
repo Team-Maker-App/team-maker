@@ -76,16 +76,18 @@ const TeamFilter = () => {
           </svg>
         </button>
       </div>
-      <div className="flex items-center mt-4">
-        <p className="text-white text-6xl pr-2 mr-2 border-r border-white">
-          {filterPlayers(players).length}
-        </p>
-        <div className="flex flex-wrap text-white gap-2">
-          {filterPlayers(players).map((player, i) => (
-            <Badge key={i} text={player} />
-          ))}
+      {filterPlayers(players).length > 0 && (
+        <div className="flex items-center mt-4">
+          <p className="text-white text-6xl pr-2 mr-2 border-r border-white">
+            {filterPlayers(players).length}
+          </p>
+          <div className="flex flex-wrap text-white gap-2">
+            {filterPlayers(players).map((player, i) => (
+              <Badge key={i} text={player} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       <div class="flex justify-end w-full mt-auto">
         <button
