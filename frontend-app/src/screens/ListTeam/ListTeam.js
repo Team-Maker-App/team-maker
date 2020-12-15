@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
-import '../../styles/styles.css';
-import './ListTeam.css';
-import {ReactComponent as Logo} from '../../styles/svg/teammaker.svg';
-import List from './List';
+import React, { useEffect } from "react";
+import "../../styles/styles.css";
+import "./ListTeam.css";
+import List from "./List";
+import { useHistory } from "react-router-dom";
+import Layout from "../../components/Layout";
 
-const ListTeam = ({location}) => {
-return (
-    <div className="flex flex-col justify-center background h-screen">
-      <div className="flex flex-row self-center my-10 absolute top-0">
-        <Logo />
-      </div>
-     <List players={location.players} /> 
-    </div>
+const ListTeam = ({ location }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!location.players) {
+      history.push("/");
+    }
+  }, []);
+
+  return (
+    <Layout>
+      <List players={location.players} />
+    </Layout>
   );
 };
 
