@@ -27,5 +27,5 @@ export function filterPlayers(str) {
 }
 
 export function randomizePlayers(players) {
-  return players;
+  return players.sort(() => Math.random() - 0.5);
 }

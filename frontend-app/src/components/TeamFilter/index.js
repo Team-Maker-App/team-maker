@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { filterPlayers } from "../../helpers";
+import { filterPlayers, randomizePlayers } from "../../helpers";
 import Logo from "../Logo";
 import Button from "../Button";
 
@@ -40,6 +40,10 @@ const TeamFilter = () => {
     navigator.clipboard.readText().then((clipText) => {
       handlePlayers(clipText);
     });
+  };
+
+  const CreateTeams = () => {
+    console.log(randomizePlayers(players));
   };
 
   return (
@@ -100,6 +104,7 @@ const TeamFilter = () => {
       <div className="flex justify-end w-full mt-auto">
         <button
           type="submit"
+          onClick={() => CreateTeams()}
           className="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
         >
           Crear equipos
