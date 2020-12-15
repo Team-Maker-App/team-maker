@@ -32,9 +32,7 @@ const TeamFilter = () => {
 
   const handlePlayers = (value) => {
     setValue(value);
-    const separatedByLineAndComma = filterPlayers(value)
-      .replace(/\n/g, ",")
-      .split(",").filter(item => item);
+    const separatedByLineAndComma = filterPlayers(value);
     setPlayers(separatedByLineAndComma);
   };
 

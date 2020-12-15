@@ -15,9 +15,15 @@ export function filterPlayers(str) {
     });
   }
 
-  const duplicatesRemoved = new Set(players);
+  const cleanPlayersList = players
+    .toString()
+    .replace(/\n/g, ",")
+    .split(",")
+    .filter((item) => item);
 
-  return [...duplicatesRemoved].toString();
+  const duplicatesRemoved = new Set(cleanPlayersList);
+
+  return [...duplicatesRemoved];
 }
 
 export function randomizePlayers(players) {
