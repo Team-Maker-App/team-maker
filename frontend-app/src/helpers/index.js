@@ -16,7 +16,8 @@ export function filterPlayers(str) {
   }
 
   const duplicatesRemoved = new Set(players);
-  return [...duplicatesRemoved];
+
+  return [...duplicatesRemoved].toString();
 }
 
 export function randomizePlayers(players) {
