@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { filterPlayers, randomizePlayers } from "../../helpers";
 import Logo from "../Logo";
 import Button from "../Button";
+import {Link} from 'react-router-dom';
 
-const TeamFilter = () => {
+const TeamFilter = ({history}) => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
@@ -43,6 +44,7 @@ const TeamFilter = () => {
   };
 
   const CreateTeams = () => {
+    history.push('/list', [players]);
     console.log(randomizePlayers(players));
   };
 
@@ -102,13 +104,15 @@ const TeamFilter = () => {
       )}
 
       <div className="flex justify-end w-full mt-auto">
-        <button
-          type="submit"
-          onClick={() => CreateTeams()}
-          className="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
-        >
-          Crear equipos
-        </button>
+        <Link to="/list">
+          <button
+            type="submit"
+            onClick={() => CreateTeams()}
+            className="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
+          >
+            Crear equipos
+          </button>
+        </Link>
       </div>
     </div>
   );
