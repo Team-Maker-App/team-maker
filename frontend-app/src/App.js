@@ -8,7 +8,7 @@ function App() {
       <div className="w-full bg-primaryDark">
         <div className="container mx-auto h-screen">
           <Route path='/' exact component={TeamFilter}/>
-          <Route path='/list' exact component={ListTeam}/>
+          <Route path='/list' component={ListTeam}/>
           {/* <TeamFilter /> */}
         </div>
       </div>

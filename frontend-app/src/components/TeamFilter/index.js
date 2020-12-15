@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { filterPlayers, randomizePlayers } from "../../helpers";
 import Logo from "../Logo";
 import Button from "../Button";
-import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
-const TeamFilter = ({history}) => {
+const TeamFilter = () => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
+  const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
   `;
@@ -44,8 +45,12 @@ const TeamFilter = ({history}) => {
   };
 
   const CreateTeams = () => {
-    history.push('/list', [players]);
-    console.log(randomizePlayers(players));
+          
+       history.push({
+           pathname: '/list',
+           players
+       });
+    
   };
 
   return (
@@ -104,15 +109,14 @@ const TeamFilter = ({history}) => {
       )}
 
       <div className="flex justify-end w-full mt-auto">
-        <Link to="/list">
           <button
+            disabled={players.length ? false : true}
             type="submit"
             onClick={() => CreateTeams()}
-            className="ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
+            className="disabled:opacity-50 ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
           >
             Crear equipos
           </button>
-        </Link>
       </div>
     </div>
   );
