@@ -69,7 +69,7 @@ const List = ({ players = [] }) => {
         </div>
         <Alert />
       </div>
-      <Button text={"Compartir"} share={handleOnClick} />
+      <Button text={"Compartir"} action={handleOnClick} />
     </div>
   );
 };
