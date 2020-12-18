@@ -1,0 +1,11 @@
+.list-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo {
+  margin: 50px;
+  width: 193px;
+  height: 31px;
+}
