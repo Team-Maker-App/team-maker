@@ -18,11 +18,12 @@ const Home = () => {
     <div className="flex flex-col justify-around items-center homeBackground h-screen">
       <div className="z-50 fixed top-14">
         <DarkLogo width={330} />
+        <TeamSVG />
       </div>
       <div className="z-50 fixed bottom-20">
         <Button text="Crear ya" action={navigate} />
       </div>
-      <div className="fixed bottom-0 z-0 h-82 sm:h-1">
+      <div className="fixed bottom-0 z-0 md:h-82 h-2/6">
         <WavyBackground />
       </div>
     </div>
