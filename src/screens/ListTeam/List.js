@@ -3,7 +3,7 @@ import { ReactComponent as Versus } from "../../versus.svg";
 import { ReactComponent as TShirt } from "../../styles/svg/whiteTShirt.svg";
 import { ReactComponent as TShirtBlue } from "../../styles/svg/blueTShirt.svg";
 import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Button";
 
 const List = ({ players = [] }) => {
   const [firstHalf, setFH] = useState([]);

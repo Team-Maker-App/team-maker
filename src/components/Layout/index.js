@@ -3,11 +3,18 @@ import Logo from "../Logo";
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex flex-col justify-center items-center background">
-      <div className="grid place-items-center h-24 w-full  bg-primaryDark shadow-xl">
+    <div
+      style={{
+        display: "grid",
+        gridTemplateRows: "80px 1fr",
+        height: "100vh",
+      }}
+      className="background"
+    >
+      <div className="grid place-items-center h-full w-full  bg-primaryDark shadow-xl">
         <Logo width={200} dark />
       </div>
-      <div className="flex-1 p-8 w-full h-screen">{children}</div>
+      {children}
     </div>
   );
 };
