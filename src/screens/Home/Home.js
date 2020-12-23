@@ -1,11 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { ReactComponent as WavyBackground } from "../../styles/svg/curveBackground.svg";
+import { ReactComponent as WavyBackground } from "../../styles/svg/curveSeparator.svg";
 import { ReactComponent as TeamSVG } from "../../styles/svg/team.svg";
 import { ReactComponent as DarkLogo } from "../../styles/svg/darkLogo.svg";
 import { useReactPWAInstall } from "react-pwa-install";
-
 
 const Home = () => {
   const history = useHistory();
@@ -22,7 +21,9 @@ const Home = () => {
       title: "Instalar Team Maker",
       description: "This is a very good app that does a lot of useful stuff. ",
     })
-      .then(() => alert("Felicidades. Team Maker ya está en tu pantalla de inicio"))
+      .then(() =>
+        alert("Felicidades. Team Maker ya está en tu pantalla de inicio")
+      )
       .catch(() => console.log("User opted out from installing"));
   };
 
