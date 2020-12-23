@@ -22,8 +22,6 @@ const ListTeam = ({ location }) => {
     }
   }, [location, history]);
 
-  console.log("history", history);
-  console.log("location", location);
   const handleOnClick = () => {
     if (navigator.share) {
       navigator
@@ -46,9 +44,9 @@ const ListTeam = ({ location }) => {
     <Layout>
       <div
         style={{ gridTemplateRows: "1fr 120px 80px" }}
-        className="grid items-center p-4"
+        className="grid items-center p-4 max-w-screen-xl mx-auto w-full"
       >
-        <div className="flex justify-around mb-5 text-center gap-2 h-full">
+        <div className="flex justify-center mb-5 text-center gap-2 h-full">
           <div className="w-1/2 bg-white rounded-md">
             <div className="flex justify-center items-center my-2">
               <TShirt />

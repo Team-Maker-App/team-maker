@@ -34,7 +34,7 @@ const Home = () => {
         gridTemplateRows: "1fr 1fr",
         height: "100vh",
       }}
-      className="background"
+      className="mx-auto bg-white max-w-screen-xl"
     >
       <div className="grid place-items-center h-full w-full  bg-white shadow-xl py-5">
         <Logo width={250} />

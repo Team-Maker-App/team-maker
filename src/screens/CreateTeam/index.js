@@ -52,7 +52,7 @@ const CreateTeam = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col p-5 gap-6">
+      <div className="flex flex-col p-5 gap-6 max-w-screen-xl mx-auto w-full">
         <div
           className="flex flex-col flex-auto w-full relative"
           style={{ maxHeight: "400px" }}
