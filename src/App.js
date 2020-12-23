@@ -1,7 +1,10 @@
-import CreateTeam from "./screens/CreateTeam";
-import ListTeam from "./screens/ListTeam/ListTeam";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Home from "./screens/Home/Home";
+
+// Components
+
+import CreateTeam from "./screens/CreateTeam";
+import Home from "./screens/Home";
+import ListTeam from "./screens/ListTeam";
 
 function App() {
   return (
