@@ -3,18 +3,27 @@ import { ReactComponent as Versus } from "../../versus.svg";
 import { ReactComponent as TShirt } from "../../styles/svg/whiteTShirt.svg";
 import { ReactComponent as TShirtBlue } from "../../styles/svg/blueTShirt.svg";
 import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button";
+import Button from "../../components/Button/Button";
+import { useHistory } from "react-router-dom";
+import Layout from "../../components/Layout";
 
-const List = ({ players = [] }) => {
+const ListTeam = ({ location }) => {
+  const history = useHistory();
   const [firstHalf, setFH] = useState([]);
   const [secondHalf, setSH] = useState([]);
 
   useEffect(() => {
-    const half = Math.ceil(players?.length / 2);
-    setFH(players.splice(0, half));
-    setSH(players.splice(-half));
-  }, []);
+    if (!location.players) {
+      history.push("/create");
+    } else {
+      const half = Math.ceil(location.players?.length / 2);
+      setFH(location.players.splice(0, half));
+      setSH(location.players.splice(-half));
+    }
+  }, [location, history]);
 
+  console.log("history", history);
+  console.log("location", location);
   const handleOnClick = () => {
     if (navigator.share) {
       navigator
@@ -34,13 +43,16 @@ const List = ({ players = [] }) => {
   };
 
   return (
-    <div className="flex flex-col flex-1">
-      <div className="flex-1">
-        <div className="flex justify-around mb-5 text-center ">
-          <div className="w-80 bg-white	min-h-80 mx-3 rounded-md divide-y mr-1">
+    <Layout>
+      <div
+        style={{ gridTemplateRows: "1fr 120px 80px" }}
+        className="grid items-center p-4"
+      >
+        <div className="flex justify-around mb-5 text-center gap-2 h-full">
+          <div className="w-1/2 bg-white rounded-md">
             <div className="flex justify-center items-center my-2">
               <TShirt />
-              <h6 className="my-3 font-display font-bold text-3xl ml-1">
+              <h6 className="my-3 font-display font-bold text-2xl ml-1">
                 Equipo 1
               </h6>
             </div>
@@ -51,12 +63,12 @@ const List = ({ players = [] }) => {
             ))}
           </div>
           <div className="absolute self-end	">
-            <Versus height={52} width={52} />
+            <Versus className="w-16 md:w-56" />
           </div>
-          <div className="w-80 bg-white	min-h-80 mx-3 rounded-md divide-y ml-1">
+          <div className="w-1/2 bg-white rounded-md">
             <div className="flex justify-center items-center my-2">
               <TShirtBlue />
-              <h6 className="my-3 font-display font-bold text-3xl ml-1">
+              <h6 className="my-3 font-display font-bold text-2xl ml-1">
                 Equipo 2
               </h6>
             </div>
@@ -68,10 +80,12 @@ const List = ({ players = [] }) => {
           </div>
         </div>
         <Alert />
+        <div className="flex justify-center items-center">
+          <Button text="Compartir" action={handleOnClick} />
+        </div>
       </div>
-      <Button text={"Compartir"} action={handleOnClick} />
-    </div>
+    </Layout>
   );
 };
 
-export default List;
+export default ListTeam;
