@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as Versus } from "../../versus.svg";
-import { ReactComponent as TShirt } from "../../styles/svg/whiteTShirt.svg";
-import { ReactComponent as TShirtBlue } from "../../styles/svg/blueTShirt.svg";
+import { useHistory } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button/Button";
-import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
+import ShirtIcon from "../../components/Icons/ShirtIcon";
 
 const ListTeam = ({ location }) => {
   const history = useHistory();
@@ -40,39 +39,46 @@ const ListTeam = ({ location }) => {
     }
   };
 
+  const truncate = (input) => {
+    if (input.length > 10) {
+      return input.substring(0, 10) + "...";
+    }
+    return input;
+  };
+
   return (
     <Layout>
       <div
         style={{ gridTemplateRows: "1fr 120px 80px" }}
-        className="grid items-center p-4 max-w-screen-xl mx-auto w-full"
+        className="grid items-center px-4 py-11 max-w-screen-xl mx-auto w-full"
       >
         <div className="flex justify-center mb-5 text-center gap-2 h-full">
-          <div className="w-1/2 bg-white rounded-md">
+          <div className="w-1/2 bg-white rounded-md p-2">
             <div className="flex justify-center items-center my-2">
-              <TShirt />
-              <h6 className="my-3 font-display font-bold text-2xl ml-1">
+              <ShirtIcon color="white" />
+              <h6 className="my-3 uppercase font-bold text-xl ml-1 text-primaryDark">
                 Equipo 1
               </h6>
             </div>
             {firstHalf?.map((player, index) => (
               <p key={index} className="font-display text-2xl h-8 p-1 my-2">
-                {player}
+                {truncate(player)}
               </p>
             ))}
           </div>
-          <div className="absolute self-end	">
-            <Versus className="w-16 md:w-56" />
+          <div className="absolute self-end mb-4	">
+            <Versus />
           </div>
-          <div className="w-1/2 bg-white rounded-md">
+          <div className="w-1/2 bg-white rounded-md p-2">
             <div className="flex justify-center items-center my-2">
-              <TShirtBlue />
-              <h6 className="my-3 font-display font-bold text-2xl ml-1">
+              <ShirtIcon />
+              <h6 className="my-3 uppercase font-bold text-xl ml-1 text-primaryDark">
                 Equipo 2
               </h6>
             </div>
             {secondHalf?.map((player, index) => (
-              <p key={index} className="font-display text-2xl h-8 p-1 my-2">
-                {player}
+              <p key={index} className="font-display text-2xl h-8 p-1 my-2 ">
+                {truncate(player)}
               </p>
             ))}
           </div>
