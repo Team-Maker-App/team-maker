@@ -1,10 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import { ReactComponent as WavyBackground } from "../../styles/svg/curveSeparator.svg";
 import { ReactComponent as TeamSVG } from "../../styles/svg/team.svg";
-import { ReactComponent as DarkLogo } from "../../styles/svg/darkLogo.svg";
+import WavyDivider from "../../components/WavyDivider";
 import { useReactPWAInstall } from "react-pwa-install";
+import Logo from "../../components/Logo";
 
 const Home = () => {
   const history = useHistory();
@@ -28,19 +28,34 @@ const Home = () => {
   };
 
   return (
-    <div className="flex flex-col justify-around items-center homeBackground h-screen">
-      <div className="z-50 fixed top-14">
-        <DarkLogo width={330} />
-        <TeamSVG />
+    <div
+      style={{
+        display: "grid",
+        gridTemplateRows: "1fr 1fr",
+        height: "100vh",
+      }}
+      className="background"
+    >
+      <div className="grid place-items-center h-full w-full  bg-white shadow-xl py-5">
+        <Logo width={250} />
+        <TeamSVG className="w-3/4" />
       </div>
-      <div className="z-50 fixed bottom-20">
-        <Button text="Crear ya" action={navigate} />
+
+      <div className="flex flex-col bg-white text-primary font-bold">
+        <WavyDivider />
+        <div className="grid place-items-center w-full flex-1 bg-primary">
+          <Button text="Crear ya" action={navigate} />
+        </div>
         {supported() && !isInstalled() && (
-          <Button action={handleInstalation} text="Instalar la app" />
+          <div className="grid place-items-center w-full h-12">
+            <Button
+              style={{ width: "100%" }}
+              action={handleInstalation}
+              className="w-full flex-1"
+              text="Instalar la App"
+            />
+          </div>
         )}
-      </div>
-      <div className="fixed bottom-0 z-0 md:h-82 h-2/6">
-        <WavyBackground />
       </div>
     </div>
   );
