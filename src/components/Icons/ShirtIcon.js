@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function ShirtIcon({ color, rest, size = 24 }) {
+function ShirtIcon({ color, size = 30, ...rest }) {
   return (
     <svg
       width={size}

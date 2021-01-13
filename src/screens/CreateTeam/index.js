@@ -7,6 +7,10 @@ const CreateTeam = () => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
+  const [match, setMatch] = useState({ 
+    location: "-", 
+    title: "-", 
+    date: new Date()});
   const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
@@ -37,6 +41,10 @@ const CreateTeam = () => {
     setPlayers(separatedByLineAndComma);
   };
 
+  const handleMatch = (value) => {
+    console.log('value', value)
+  };
+
   const handlePaste = () => {
     navigator.clipboard.readText().then((clipText) => {
       handlePlayers(clipText);
@@ -46,7 +54,7 @@ const CreateTeam = () => {
   const CreateTeams = () => {
     history.push({
       pathname: "/list",
-      players,
+      players, match
     });
   };
 
@@ -86,6 +94,13 @@ const CreateTeam = () => {
         </div>
         <div className="flex w-full items-center gap-2 h-10">
           <input
+            type="text"
+            className="rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            placeholder="Agregar jugador"
+            onChange={(event) => setNewPlayer(event.target.value)}
+            value={newplayer}
+          />
+                    <input
             type="text"
             className="rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
             placeholder="Agregar jugador"

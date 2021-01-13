@@ -5,21 +5,41 @@ import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button/Button";
 import Layout from "../../components/Layout";
 import ShirtIcon from "../../components/Icons/ShirtIcon";
+import ShareIcon from "../../components/Icons/ShareIcon";
 
 const ListTeam = ({ location }) => {
   const history = useHistory();
+  const { players, match } = location;
+  console.log("location", location);
   const [firstHalf, setFH] = useState([]);
   const [secondHalf, setSH] = useState([]);
 
   useEffect(() => {
-    if (!location.players) {
+    if (!players) {
       history.push("/create");
     } else {
-      const half = Math.ceil(location.players?.length / 2);
-      setFH(location.players.splice(0, half));
-      setSH(location.players.splice(-half));
+      /*
+      players = [
+        "lele",
+        "erik",
+        "oveja",
+        "damián",
+        "gonzalo",
+        "herni",
+        "pleis",
+        "ale",
+        "burro",
+        "mono",
+        "sera",
+        "pablito",
+      ];
+      */
+
+      const half = Math.ceil(players?.length / 2);
+      setFH(players.splice(0, half));
+      setSH(players.splice(-half));
     }
-  }, [location, history]);
+  }, [players, history]);
 
   const handleOnClick = () => {
     if (navigator.share) {
@@ -48,48 +68,85 @@ const ListTeam = ({ location }) => {
 
   return (
     <Layout>
-      <div
-        style={{ gridTemplateRows: "1fr 120px 80px" }}
-        className="grid items-center px-4 py-11 max-w-screen-xl mx-auto w-full"
-      >
-        <div className="flex justify-center mb-5 text-center gap-2 h-full">
-          <div className="w-1/2 bg-white rounded-md p-2">
-            <div className="flex justify-center items-center my-2">
-              <ShirtIcon color="white" />
-              <h6 className="my-3 uppercase font-bold text-xl ml-1 text-primaryDark">
+      <div className="flex flex-col gap-5 p-4 pt-10">
+        <div className="col-span-1 flex shadow-sm rounded-md sm:w-1/2 mx-auto">
+          <div className="flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md">
+            <svg
+              width={30}
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+            <div className="flex-1 px-4 py-2 text-sm truncate">
+              <p className="text-gray-900 font-medium hover:text-gray-600">
+                {match.title}
+              </p>
+              <p className="text-gray-500">{match.date}</p>
+              <p className="text-gray-500">{players?.length} Jugadores</p>
+            </div>
+          </div>
+        </div>
+        <div
+          style={{ minHeight: "100px" }}
+          className="relative flex justify-center mb-5 text-center gap-3"
+        >
+          <div className="relative w-1/2 bg-white rounded-md px-2 py-6">
+            <ShirtIcon color="white" className="absolute top-2 left-2" />
+            <ul className="divide-y divide-gray-200">
+              {firstHalf?.map((player, index) => (
+                <li
+                  key={index}
+                  className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center"
+                >
+                  {truncate(player)}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="z-10 absolute bottom-3">
+            <Versus width={45} height={45} />
+          </div>
+          <div className="relative w-1/2 bg-white rounded-md px-2 py-6">
+            <ShirtIcon className="absolute top-2 left-2" />
+            {/* <div className="flex border-b border-gray-200 justify-between items-center pb-3">
+              <h3 className="text-md leading-4 font-medium ml-1 text-primaryDark">
                 Equipo 1
-              </h6>
-            </div>
-            {firstHalf?.map((player, index) => (
-              <p key={index} className="font-display text-2xl h-8 p-1 my-2">
-                {truncate(player)}
-              </p>
-            ))}
-          </div>
-          <div className="absolute self-end mb-4	">
-            <Versus />
-          </div>
-          <div className="w-1/2 bg-white rounded-md p-2">
-            <div className="flex justify-center items-center my-2">
-              <ShirtIcon />
-              <h6 className="my-3 uppercase font-bold text-xl ml-1 text-primaryDark">
-                Equipo 2
-              </h6>
-            </div>
-            {secondHalf?.map((player, index) => (
-              <p key={index} className="font-display text-2xl h-8 p-1 my-2 ">
-                {truncate(player)}
-              </p>
-            ))}
+              </h3>
+              
+            </div> */}
+            <ul className="divide-y divide-gray-200">
+              {secondHalf?.map((player, index) => (
+                <li
+                  key={index}
+                  className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center"
+                >
+                  {truncate(player)}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <Alert />
         <div className="flex justify-center items-center">
-          <Button text="Compartir" action={handleOnClick} />
+          <Button action={handleOnClick}>
+            <div className="flex gap-4 w-full justify-center items-center">
+              <span>Compartir</span>
+              <ShareIcon className="w-4 h-4" />
+            </div>
+          </Button>
         </div>
       </div>
     </Layout>
   );
 };
-
 export default ListTeam;
