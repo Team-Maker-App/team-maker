@@ -7,29 +7,15 @@ const CreateTeam = () => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
-  const [match, setMatch] = useState({ 
-    location: "-", 
-    title: "-", 
-    date: new Date()});
+  const [match, setMatch] = useState({
+    location: "Club Atletico Kimberley",
+    date: new Date("January 17, 2021 19:00:00"),
+  });
+
   const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
   `;
-
-  /* Lista de prueba
-  1. Pablo
-  2 lele
-  3 pleis
-  4 oveja
-  5 gonzalo
-  6 Damián
-  7 Herni
-  8 Burro rebotes
-  9 German sin pulmones
-  10 Ale
-  11 Sera al final se muda en Enero
-  12 mono
-*/
 
   const addPlayer = () => {
     setPlayers(filterPlayers([...players, newplayer]));
@@ -42,7 +28,7 @@ const CreateTeam = () => {
   };
 
   const handleMatch = (value) => {
-    console.log('value', value)
+    console.log("value", value);
   };
 
   const handlePaste = () => {
@@ -54,7 +40,7 @@ const CreateTeam = () => {
   const CreateTeams = () => {
     history.push({
       pathname: "/list",
-      players, match
+      state: { players, match },
     });
   };
 
@@ -100,7 +86,7 @@ const CreateTeam = () => {
             onChange={(event) => setNewPlayer(event.target.value)}
             value={newplayer}
           />
-                    <input
+          <input
             type="text"
             className="rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
             placeholder="Agregar jugador"

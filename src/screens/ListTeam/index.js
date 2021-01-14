@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useHistory } from "react-router-dom";
+import { format } from "date-fns";
+import { es } from "date-fns/esm/locale";
+
+// Components
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button/Button";
 import Layout from "../../components/Layout";
@@ -9,8 +13,7 @@ import ShareIcon from "../../components/Icons/ShareIcon";
 
 const ListTeam = ({ location }) => {
   const history = useHistory();
-  const { players, match } = location;
-  console.log("location", location);
+  const { players, match } = location.state;
   const [firstHalf, setFH] = useState([]);
   const [secondHalf, setSH] = useState([]);
 
@@ -18,28 +21,13 @@ const ListTeam = ({ location }) => {
     if (!players) {
       history.push("/create");
     } else {
-      /*
-      players = [
-        "lele",
-        "erik",
-        "oveja",
-        "damián",
-        "gonzalo",
-        "herni",
-        "pleis",
-        "ale",
-        "burro",
-        "mono",
-        "sera",
-        "pablito",
-      ];
-      */
-
       const half = Math.ceil(players?.length / 2);
       setFH(players.splice(0, half));
       setSH(players.splice(-half));
     }
   }, [players, history]);
+
+  console.log("match", match);
 
   const handleOnClick = () => {
     if (navigator.share) {
@@ -69,7 +57,7 @@ const ListTeam = ({ location }) => {
   return (
     <Layout>
       <div className="flex flex-col gap-5 p-4 pt-10">
-        <div className="col-span-1 flex shadow-sm rounded-md sm:w-1/2 mx-auto">
+        <div className="col-span-1 flex shadow-sm rounded-md w-5/6 mx-auto">
           <div className="flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md">
             <svg
               width={30}
@@ -79,9 +67,9 @@ const ListTeam = ({ location }) => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
@@ -89,10 +77,12 @@ const ListTeam = ({ location }) => {
           <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
             <div className="flex-1 px-4 py-2 text-sm truncate">
               <p className="text-gray-900 font-medium hover:text-gray-600">
-                {match.title}
+                {match.location}
               </p>
-              <p className="text-gray-500">{match.date}</p>
-              <p className="text-gray-500">{players?.length} Jugadores</p>
+              <p className="text-gray-500 capitalize">
+                {format(match.date, "EEEE dd/MM - p", { locale: es })}
+              </p>
+              <p className="text-gray-500">12 Jugadores</p>
             </div>
           </div>
         </div>
