@@ -23,8 +23,6 @@ const CreateTeam = () => {
     date: today,
   });
 
-  console.log("match", match);
-
   const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
@@ -115,7 +113,7 @@ const CreateTeam = () => {
             </svg>
           </button>
         </div>
-        <p className="text-white">Datos del partido</p>
+        <p className="text-white font-sans ">Datos del partido</p>
         <div className="flex gap-5">
           <input
             type="text"

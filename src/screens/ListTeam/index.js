@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useHistory } from "react-router-dom";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { es } from "date-fns/esm/locale";
 
 // Components
@@ -80,7 +80,10 @@ const ListTeam = ({ location }) => {
                 {match.location}
               </p>
               <p className="text-gray-500 capitalize">
-                {format(match.date, "EEEE dd/MM - p", { locale: es })}
+                {format(parseISO(match.date), "EEEE dd/MM - p", {
+                  locale: es,
+                })}{" "}
+                hs
               </p>
               <p className="text-gray-500">12 Jugadores</p>
             </div>
