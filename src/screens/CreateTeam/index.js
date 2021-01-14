@@ -7,10 +7,23 @@ const CreateTeam = () => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
+
+  const today = `${new Date().getFullYear()}-${`${
+    new Date().getMonth() + 1
+  }`.padStart(2, 0)}-${`${new Date().getDate() + 1}`.padStart(
+    2,
+    0
+  )}T${`${new Date().getHours()}`.padStart(
+    2,
+    0
+  )}:${`${new Date().getMinutes()}`.padStart(2, 0)}`;
+
   const [match, setMatch] = useState({
-    location: "Club Atletico Kimberley",
-    date: new Date("January 17, 2021 19:00:00"),
+    location: "",
+    date: today,
   });
+
+  console.log("match", match);
 
   const history = useHistory();
 
@@ -25,10 +38,6 @@ const CreateTeam = () => {
     setValue(value);
     const separatedByLineAndComma = filterPlayers(value);
     setPlayers(separatedByLineAndComma);
-  };
-
-  const handleMatch = (value) => {
-    console.log("value", value);
   };
 
   const handlePaste = () => {
@@ -86,13 +95,6 @@ const CreateTeam = () => {
             onChange={(event) => setNewPlayer(event.target.value)}
             value={newplayer}
           />
-          <input
-            type="text"
-            className="rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
-            placeholder="Agregar jugador"
-            onChange={(event) => setNewPlayer(event.target.value)}
-            value={newplayer}
-          />
           <button
             type="button"
             onClick={() => addPlayer()}
@@ -112,6 +114,28 @@ const CreateTeam = () => {
               />
             </svg>
           </button>
+        </div>
+        <p className="text-white">Datos del partido</p>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            className=" rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            placeholder="Lugar"
+            onChange={(event) =>
+              setMatch({ ...match, location: event.target.value })
+            }
+            value={match.location}
+          />
+          <input
+            type="datetime-local"
+            className=" w-1/4 rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            placeholder="Fecha"
+            onChange={(event) =>
+              setMatch({ ...match, date: event.target.value })
+            }
+            min={today}
+            value={match.date}
+          />
         </div>
         {players.length > 0 && (
           <div className="flex items-center mt-4">
