@@ -7,25 +7,26 @@ const CreateTeam = () => {
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
+
+  const today = `${new Date().getFullYear()}-${`${
+    new Date().getMonth() + 1
+  }`.padStart(2, 0)}-${`${new Date().getDate() + 1}`.padStart(
+    2,
+    0
+  )}T${`${new Date().getHours()}`.padStart(
+    2,
+    0
+  )}:${`${new Date().getMinutes()}`.padStart(2, 0)}`;
+
+  const [match, setMatch] = useState({
+    location: "",
+    date: today,
+  });
+
   const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
   `;
-
-  /* Lista de prueba
-  1. Pablo
-  2 lele
-  3 pleis
-  4 oveja
-  5 gonzalo
-  6 Damián
-  7 Herni
-  8 Burro rebotes
-  9 German sin pulmones
-  10 Ale
-  11 Sera al final se muda en Enero
-  12 mono
-*/
 
   const addPlayer = () => {
     setPlayers(filterPlayers([...players, newplayer]));
@@ -46,7 +47,7 @@ const CreateTeam = () => {
   const CreateTeams = () => {
     history.push({
       pathname: "/list",
-      players,
+      state: { players, match },
     });
   };
 
@@ -111,6 +112,28 @@ const CreateTeam = () => {
               />
             </svg>
           </button>
+        </div>
+        <p className="text-white font-sans ">Datos del partido</p>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            className=" rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            placeholder="Lugar"
+            onChange={(event) =>
+              setMatch({ ...match, location: event.target.value })
+            }
+            value={match.location}
+          />
+          <input
+            type="datetime-local"
+            className=" w-1/4 rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            placeholder="Fecha"
+            onChange={(event) =>
+              setMatch({ ...match, date: event.target.value })
+            }
+            min={today}
+            value={match.date}
+          />
         </div>
         {players.length > 0 && (
           <div className="flex items-center mt-4">
