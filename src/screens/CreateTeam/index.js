@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { filterPlayers } from "../../helpers";
+import { filterPlayers, randomizePlayers } from "../../helpers";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
 
@@ -45,6 +45,7 @@ const CreateTeam = () => {
   };
 
   const CreateTeams = () => {
+    randomizePlayers(players);
     history.push({
       pathname: "/list",
       state: { players, match },
