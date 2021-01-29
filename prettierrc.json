@@ -14,5 +14,8 @@
   "trailingComma": "es5",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
-  "printWidth": 120
+  "printWidth": 120,
+  "[javascript]": {
+    "editor.formatOnSave": true
+  }
 }

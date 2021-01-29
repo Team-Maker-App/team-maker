@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { ReactComponent as TeamSVG } from "../../styles/svg/team.svg";
 import WavyDivider from "../../components/WavyDivider";
 import { useReactPWAInstall } from "react-pwa-install";
 import Logo from "../../components/Logo";
+import Alert from '../../components/Alert/Alert';
+import Layout from "../../components/Layout";
 
 const Home = () => {
   const history = useHistory();
   const { pwaInstall, supported, isInstalled } = useReactPWAInstall();
+  const [presentation, setPresentation] = useState(true);
 
   const navigate = () => {
     history.push({
@@ -27,8 +30,15 @@ const Home = () => {
       .catch(() => console.log("User opted out from installing"));
   };
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPresentation(false)
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, [presentation]);
+
   return (
-    <div
+      <div
       style={{
         display: "grid",
         gridTemplateRows: "1fr 1fr",
@@ -44,18 +54,26 @@ const Home = () => {
       <div className="flex flex-col bg-white text-primary font-bold">
         <WavyDivider />
         <div className="grid place-items-center w-full flex-1 bg-primary">
-          <Button text="Crear ya" action={navigate} />
+          {presentation ?
+            <p className="text-white text-xl">
+              {`Creá equipos rapidamente con Team Maker \n
+                Los vas a poder compartir en donde quieras \n
+                Comenzá ya mismo apretando en el botón.
+              `}
+            </p> :
+            <>
+              <Button text="Crear ya" action={navigate} />
+              {supported() && !isInstalled() && (
+                <div className="grid place-items-center w-full h-12">
+                  <Button
+                    action={handleInstalation}
+                    text="Instalar la App"
+                  />
+                </div>
+              )}
+            </>
+          }
         </div>
-        {supported() && !isInstalled() && (
-          <div className="grid place-items-center w-full h-12">
-            <Button
-              style={{ width: "100%" }}
-              action={handleInstalation}
-              className="w-full flex-1"
-              text="Instalar la App"
-            />
-          </div>
-        )}
       </div>
     </div>
   );

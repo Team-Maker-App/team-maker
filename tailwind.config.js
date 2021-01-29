@@ -8,11 +8,21 @@ module.exports = {
       ...colors,
       primary: "#2C3590",
       primaryDark: "#171F6D",
+      primaryDesktop: "#FFFFFF",
+    },
+    textColors: {
+      primary: "#2C3590",
+      primaryDark: "#171F6D",
+      primaryDesktop: "#FFFFFF",
     },
     fontFamily: {
       sans: ["Inter", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: theme => ({
+        'wavyPattern': "url('/src/styles/svg/wavy-desktop.svg')"
+      })
+    },
   },
   variants: {
     extend: {
