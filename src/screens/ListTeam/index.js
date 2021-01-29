@@ -129,7 +129,7 @@ const ListTeam = ({ location }) => {
             </ul>
           </div>
         </div>
-        <Alert />
+        <Alert text={listTeamStrings.position} />
         <div className="flex justify-center items-center">
           <Button action={handleOnClick}>
             <div className="flex gap-4 w-full justify-center items-center">
@@ -142,4 +142,9 @@ const ListTeam = ({ location }) => {
     </Layout>
   );
 };
+
+const listTeamStrings = {
+  position: 'La posición de los jugadores no determina el orden en que atajan'
+};
+
 export default ListTeam;
