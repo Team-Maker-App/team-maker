@@ -1,14 +1,16 @@
+/* eslint-disable global-require */
+/* eslint-disable import/no-unresolved */
 module.exports = {
   plugins: [
-    require("postcss-preset-env")({
+    require('postcss-preset-env')({
       autoprefixer: {
-        flexbox: "no-2009",
+        flexbox: 'no-2009',
       },
       stage: 3,
       features: {
-        "nesting-rules": true,
+        'nesting-rules': true,
       },
     }),
-    require("tailwindcss")("./tailwind.config.js"),
+    require('tailwindcss')('./tailwind.config.js'),
   ],
 };
