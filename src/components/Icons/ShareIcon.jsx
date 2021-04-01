@@ -1,13 +1,15 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ShareIcon = (props) => {
+  const { className } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
-      {...props}
+      className={className}
     >
       <path
         strokeLinecap="round"
@@ -17,6 +19,14 @@ const ShareIcon = (props) => {
       />
     </svg>
   );
+};
+
+ShareIcon.defaultProps = {
+  className: '',
+};
+
+ShareIcon.propTypes = {
+  className: PropTypes.string,
 };
 
 export default ShareIcon;

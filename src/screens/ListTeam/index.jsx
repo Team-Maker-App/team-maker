@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { ReactComponent as Versus } from "../../versus.svg";
-import { useHistory } from "react-router-dom";
-import { format, parseISO } from "date-fns";
-import { es } from "date-fns/esm/locale";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
+import { es } from 'date-fns/esm/locale';
+import { ReactComponent as Versus } from '../../versus.svg';
 
 // Components
-import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button/Button";
-import Layout from "../../components/Layout";
-import ShirtIcon from "../../components/Icons/ShirtIcon";
-import ShareIcon from "../../components/Icons/ShareIcon";
+import Alert from '../../components/Alert/Alert';
+import Button from '../../components/Button/Button';
+import Layout from '../../components/Layout';
+import ShirtIcon from '../../components/Icons/ShirtIcon';
+import ShareIcon from '../../components/Icons/ShareIcon';
+import STRINGS from '../../utilities/strings';
 
 const ListTeam = ({ location }) => {
   const history = useHistory();
@@ -19,7 +21,7 @@ const ListTeam = ({ location }) => {
 
   useEffect(() => {
     if (!players) {
-      history.push("/create");
+      history.push('/create');
     } else {
       const half = Math.ceil(players?.length / 2);
       setFH(players.splice(0, half));
@@ -27,29 +29,27 @@ const ListTeam = ({ location }) => {
     }
   }, [players, history]);
 
-  console.log("match", match);
-
   const handleOnClick = () => {
     if (navigator.share) {
       navigator
         .share({
-          title: "Team Maker",
-          text: "Esto esta compartido desde Team Maker",
+          title: 'Team Maker',
+          text: 'Esto esta compartido desde Team Maker',
           url:
-            "https://tmssl.akamaized.net/images/portrait/originals/57473-1458043478.jpg",
+            'https://tmssl.akamaized.net/images/portrait/originals/57473-1458043478.jpg',
         })
         .then(() => {
-          console.log("Successfully shared");
+          console.log('Successfully shared');
         })
         .catch((error) => {
-          console.error("Something went wrong sharing the blog", error);
+          console.error('Something went wrong sharing the blog', error);
         });
     }
   };
 
   const truncate = (input) => {
     if (input.length > 10) {
-      return input.substring(0, 10) + "...";
+      return `${input.substring(0, 10)}...`;
     }
     return input;
   };
@@ -80,9 +80,10 @@ const ListTeam = ({ location }) => {
                 {match.location}
               </p>
               <p className="text-gray-500 capitalize">
-                {format(parseISO(match.date), "EEEE dd/MM - p", {
+                {format(parseISO(match.date), 'EEEE dd/MM - p', {
                   locale: es,
-                })}{" "}
+                })}
+                {' '}
                 hs
               </p>
               <p className="text-gray-500">12 Jugadores</p>
@@ -90,7 +91,7 @@ const ListTeam = ({ location }) => {
           </div>
         </div>
         <div
-          style={{ minHeight: "100px" }}
+          style={{ minHeight: '100px' }}
           className="relative flex justify-center mb-5 text-center gap-3"
         >
           <div className="relative w-1/2 bg-white rounded-md px-2 py-6">
@@ -98,7 +99,7 @@ const ListTeam = ({ location }) => {
             <ul className="divide-y divide-gray-200">
               {firstHalf?.map((player, index) => (
                 <li
-                  key={index}
+                  key={player[index]}
                   className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center"
                 >
                   {truncate(player)}
@@ -111,16 +112,10 @@ const ListTeam = ({ location }) => {
           </div>
           <div className="relative w-1/2 bg-white rounded-md px-2 py-6">
             <ShirtIcon className="absolute top-2 left-2" />
-            {/* <div className="flex border-b border-gray-200 justify-between items-center pb-3">
-              <h3 className="text-md leading-4 font-medium ml-1 text-primaryDark">
-                Equipo 1
-              </h3>
-              
-            </div> */}
             <ul className="divide-y divide-gray-200">
               {secondHalf?.map((player, index) => (
                 <li
-                  key={index}
+                  key={player[index]}
                   className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center"
                 >
                   {truncate(player)}
@@ -129,7 +124,7 @@ const ListTeam = ({ location }) => {
             </ul>
           </div>
         </div>
-        <Alert text={listTeamStrings.position} />
+        <Alert text={STRINGS.listTeamScreen.position} />
         <div className="flex justify-center items-center">
           <Button action={handleOnClick}>
             <div className="flex gap-4 w-full justify-center items-center">
@@ -143,8 +138,8 @@ const ListTeam = ({ location }) => {
   );
 };
 
-const listTeamStrings = {
-  position: 'La posición de los jugadores no determina el orden en que atajan'
+ListTeam.propTypes = {
+  location: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default ListTeam;
