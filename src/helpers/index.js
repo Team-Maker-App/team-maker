@@ -1,3 +1,4 @@
+/* eslint-disable no-cond-assign */
 export function filterPlayers(str) {
   const regex = /[a-zÀ-ÿ\s]+/gi;
 
@@ -6,6 +7,7 @@ export function filterPlayers(str) {
 
   while ((m = regex.exec(str)) !== null) {
     if (m.index === regex.lastIndex) {
+      // eslint-disable-next-line no-plusplus
       regex.lastIndex++;
     }
 

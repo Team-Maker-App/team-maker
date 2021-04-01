@@ -2,9 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 const ShirtIcon = ({ color, size, ...rest }) => {
-  const { className } = rest;
-  console.log(rest);
-  console.log(color);
+	const { className } = rest;
 
   return (
     <svg
@@ -37,14 +35,14 @@ const ShirtIcon = ({ color, size, ...rest }) => {
 };
 
 ShirtIcon.defaultProps = {
-  size: 30,
-  rest: '',
+	size: 30,
+	rest: '',
 };
 
 ShirtIcon.propTypes = {
-  color: PropTypes.string.isRequired,
-  size: PropTypes.number,
-  rest: PropTypes.string,
+	color: PropTypes.string.isRequired,
+	size: PropTypes.number,
+	rest: PropTypes.string,
 };
 
 export default ShirtIcon;

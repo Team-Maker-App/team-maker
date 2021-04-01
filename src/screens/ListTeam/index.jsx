@@ -14,20 +14,20 @@ import ShareIcon from '../../components/Icons/ShareIcon';
 import STRINGS from '../../utilities/strings';
 
 const ListTeam = ({ location }) => {
-  const history = useHistory();
-  const { players, match } = location.state;
-  const [firstHalf, setFH] = useState([]);
-  const [secondHalf, setSH] = useState([]);
+	const history = useHistory();
+	const { players, match } = location.state;
+	const [firstHalf, setFH] = useState([]);
+	const [secondHalf, setSH] = useState([]);
 
-  useEffect(() => {
-    if (!players) {
-      history.push('/create');
-    } else {
-      const half = Math.ceil(players?.length / 2);
-      setFH(players.splice(0, half));
-      setSH(players.splice(-half));
-    }
-  }, [players, history]);
+	useEffect(() => {
+		if (!players) {
+			history.push('/create');
+		} else {
+			const half = Math.ceil(players?.length / 2);
+			setFH(players.splice(0, half));
+			setSH(players.splice(-half));
+		}
+	}, [players, history]);
 
   console.log("match", match);
 
@@ -82,12 +82,12 @@ const ListTeam = ({ location }) => {
     });
   };
 
-  const truncate = (input) => {
-    if (input.length > 10) {
-      return `${input.substring(0, 10)}...`;
-    }
-    return input;
-  };
+	const truncate = (input) => {
+		if (input.length > 10) {
+			return `${input.substring(0, 10)}...`;
+		}
+		return input;
+	};
 
   return (
     <div id="capture">
