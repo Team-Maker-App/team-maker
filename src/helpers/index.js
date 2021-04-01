@@ -17,8 +17,8 @@ export function filterPlayers(str) {
 
   const cleanPlayersList = players
     .toString()
-    .replace(/\n/g, ",")
-    .split(",")
+    .replace(/\n/g, ',')
+    .split(',')
     .filter((item) => item);
 
   const duplicatesRemoved = new Set(cleanPlayersList);

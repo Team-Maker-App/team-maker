@@ -6,11 +6,12 @@ import { es } from "date-fns/esm/locale";
 import html2canvas from "html2canvas";
 
 // Components
-import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button/Button";
-import Layout from "../../components/Layout";
-import ShirtIcon from "../../components/Icons/ShirtIcon";
-import ShareIcon from "../../components/Icons/ShareIcon";
+import Alert from '../../components/Alert/Alert';
+import Button from '../../components/Button/Button';
+import Layout from '../../components/Layout';
+import ShirtIcon from '../../components/Icons/ShirtIcon';
+import ShareIcon from '../../components/Icons/ShareIcon';
+import STRINGS from '../../utilities/strings';
 
 const ListTeam = ({ location }) => {
   const history = useHistory();
@@ -20,7 +21,7 @@ const ListTeam = ({ location }) => {
 
   useEffect(() => {
     if (!players) {
-      history.push("/create");
+      history.push('/create');
     } else {
       const half = Math.ceil(players?.length / 2);
       setFH(players.splice(0, half));
@@ -83,7 +84,7 @@ const ListTeam = ({ location }) => {
 
   const truncate = (input) => {
     if (input.length > 10) {
-      return input.substring(0, 10) + "...";
+      return `${input.substring(0, 10)}...`;
     }
     return input;
   };
