@@ -125,7 +125,7 @@ const ListTeam = ({ location }) => {
 				</div>
 				<Alert text={STRINGS.listTeamScreen.position} />
 				<div className='flex justify-center items-center'>
-					<Button action={handleOnClick}>
+					<Button action={handleOnClick} disabled>
 						<div className='flex gap-4 w-full justify-center items-center'>
 							<span>Compartir</span>
 							<ShareIcon className='w-4 h-4' />
