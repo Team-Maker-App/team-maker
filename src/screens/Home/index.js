@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import { ReactComponent as TeamSVG } from "../../styles/svg/team.svg";
 import WavyDivider from "../../components/WavyDivider";
 import Logo from "../../components/Logo";
-import Alert from '../../components/Alert/Alert';
-import Layout from "../../components/Layout";
 
 const Home = () => {
   const history = useHistory();

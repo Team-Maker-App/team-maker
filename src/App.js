@@ -6,7 +6,6 @@ import {
 // Components
 
 import CreateTeam from "./screens/CreateTeam";
-import Home from "./screens/Home";
 import ListTeam from "./screens/ListTeam";
 import HomeDesktop from "./screens/HomeDesktop/HomeDesktop";
 import Presentation from "./screens/Presentation";
