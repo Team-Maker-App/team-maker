@@ -1,12 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const ShirtIcon = ({ color, size, ...rest }) => {
+const ShirtIcon = ({ color, size = 30, ...rest }) => {
 	const { className } = rest;
 
   return (
     <svg
-      className="shirtIcon"
       width={size}
       height={size}
       viewBox="0 0 18 18"
