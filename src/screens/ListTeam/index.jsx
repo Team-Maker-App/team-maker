@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { es } from 'date-fns/esm/locale';
 import { ReactComponent as Versus } from '../../versus.svg';
+import html2canvas from "html2canvas";
 
 // Components
 import Alert from '../../components/Alert/Alert';
@@ -29,22 +30,41 @@ const ListTeam = ({ location }) => {
 		}
 	}, [players, history]);
 
-	const handleOnClick = () => {
-		if (navigator.share) {
-			navigator
-				.share({
-					title: 'Team Maker',
-					text: 'Esto esta compartido desde Team Maker',
-					url:
-						'https://tmssl.akamaized.net/images/portrait/originals/57473-1458043478.jpg',
-				})
-				.then(() => {
-					// console.log('Successfully shared');
-				})
-				.catch(() => {
-					// console.error('Something went wrong sharing the blog', error);
-				});
+	function dataURLtoFile(dataurl, filename) {
+		let arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+		while(n--){
+			u8arr[n] = bstr.charCodeAt(n);
 		}
+		return new File([u8arr], filename, {type:mime});
+	}
+
+
+	const handleOnClick = () => {
+		const domElement = document.getElementById("capture");
+		html2canvas(domElement, {
+		  }).then(canvas => {
+			const imgData = canvas.toDataURL("image/png");
+			const file = dataURLtoFile(imgData, 'photo.png');
+
+			if (navigator.share) {
+				navigator
+					.share({
+						title: 'Team Maker',
+						text: 'Esto esta compartido desde Team Maker',
+						url: window.location,
+						files: [file]
+					})
+					.then(() => {
+						console.log('Successfully shared');
+					})
+					.catch((error) => {
+						console.error('Something went wrong sharing the blog', error);
+					});
+			}
+		  });
+
+		
 	};
 
 	const truncate = (input) => {
@@ -56,7 +76,7 @@ const ListTeam = ({ location }) => {
 
 	return (
 		<Layout>
-			<div className='flex flex-col gap-5 p-4 pt-10'>
+			<div className='flex flex-col gap-5 p-4 pt-10' id="capture">
 				<div className='col-span-1 flex shadow-sm rounded-md w-5/6 mx-auto'>
 					<div className='flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md'>
 						<svg
