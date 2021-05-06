@@ -9,7 +9,6 @@ const CreateTeam = () => {
   const [location, setLocation] = useLocalStorage("match-location", "");
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
-  const [newplayer, setNewPlayer] = useState("");
 
   const today = `${new Date().getFullYear()}-${`${
     new Date().getMonth() + 1
@@ -34,10 +33,6 @@ const CreateTeam = () => {
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
   `;
-
-  const addPlayer = () => {
-    setPlayers(filterPlayers([...players, newplayer]));
-  };
 
   const handlePlayers = (value) => {
     setValue(value);
@@ -103,34 +98,6 @@ const CreateTeam = () => {
               </svg>
             </button>
           </div>
-        </div>
-        <div className="flex w-full items-center gap-2 h-10">
-          <input
-            type="text"
-            className="rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
-            placeholder="Agregar jugador"
-            onChange={(event) => setNewPlayer(event.target.value)}
-            value={newplayer}
-          />
-          <button
-            type="button"
-            onClick={() => addPlayer()}
-            className="h-full bg-white inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-          >
-            <svg
-              className="h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
         </div>
         <p className="text-white font-sans">Datos del partido</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
