@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { filterPlayers, randomizePlayers } from "../../helpers";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const CreateTeam = () => {
+  const [location, setLocation] = useLocalStorage("match-location", "");
   const [value, setValue] = useState([]);
   const [players, setPlayers] = useState([]);
   const [newplayer, setNewPlayer] = useState("");
@@ -19,10 +21,14 @@ const CreateTeam = () => {
   )}:${`${new Date().getMinutes()}`.padStart(2, 0)}`;
 
   const [match, setMatch] = useState({
-    location: "",
+    location,
     date: today,
   });
 
+  const handleMatch = (value) => {
+    setMatch(value);
+    setLocation(value.location);
+  };
   const history = useHistory();
 
   const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
@@ -121,7 +127,7 @@ const CreateTeam = () => {
             className=" rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
             placeholder="Lugar"
             onChange={(event) =>
-              setMatch({ ...match, location: event.target.value })
+              handleMatch({ ...match, location: event.target.value })
             }
             value={match.location}
           />
