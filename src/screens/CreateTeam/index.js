@@ -72,26 +72,37 @@ const CreateTeam = () => {
             value={value}
             placeholder={placeholder}
           />
-          <button
-            onClick={() => handlePaste()}
-            type="button"
-            className="sm:ml-3 absolute bottom-5 right-2 inline-flex items-center p-3 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700 focus:outline-none"
-          >
-            <svg
-              className="h-5 w-5"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <div className="flex gap-x-2 absolute bottom-5 right-5">
+            <div
+              className={`grid place-items-center h-12 w-12 rounded-md shadow-sm text-sm font-medium text-white bg-teal-400 hover:bg-teal-500 focus:outline-none transition-opacity duration-200 ease-in-out ${
+                players.length > 0 ? "opacity-100" : "opacity-0"
+              }`}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-              />
-            </svg>
-          </button>
+              <span className=" text-2xl">
+                {players.length > 0 ? players.length : ""}
+              </span>
+            </div>
+            <button
+              onClick={() => handlePaste()}
+              type="button"
+              className="grid place-items-center h-12 w-12 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700 focus:outline-none"
+            >
+              <svg
+                className="h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
         <div className="flex w-full items-center gap-2 h-10">
           <input
@@ -121,7 +132,7 @@ const CreateTeam = () => {
             </svg>
           </button>
         </div>
-        <p className="text-white font-sans ">Datos del partido</p>
+        <p className="text-white font-sans">Datos del partido</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <input
             type="text"
@@ -134,18 +145,6 @@ const CreateTeam = () => {
           />
           <DatePicker />
         </div>
-        {players.length > 0 && (
-          <div className="flex items-center mt-4">
-            <p className="text-white text-6xl pr-2 mr-2 border-r border-white">
-              {players.length}
-            </p>
-            <div className="flex flex-wrap text-white gap-2">
-              {players.map((player, i) => (
-                <Badge key={i} text={player} />
-              ))}
-            </div>
-          </div>
-        )}
 
         <div className="flex justify-center w-full">
           <button
@@ -159,31 +158,6 @@ const CreateTeam = () => {
         </div>
       </div>
     </Layout>
-  );
-};
-
-const Badge = ({ text }) => {
-  return (
-    <span
-      style={{ textTransform: "capitalize" }}
-      className="inline-flex rounded-full items-center py-0.5 pl-2.5 pr-1 text-sm font-medium bg-indigo-100 text-indigo-700"
-    >
-      {text}
-      <button
-        type="button"
-        className="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
-      >
-        <span className="sr-only">Remove small option</span>
-        <svg
-          className="h-2 w-2"
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 8 8"
-        >
-          <path strokeLinecap="round" strokeWidth="1.5" d="M1 1l6 6m0-6L1 7" />
-        </svg>
-      </button>
-    </span>
   );
 };
 
