@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { isMobile } from "react-device-detect";
+import {
+  isMobile
+} from "react-device-detect";
 
 // Components
 
@@ -14,12 +16,8 @@ function App() {
   return (
     <Router>
       <div className="w-full bg-primaryDark">
-        <div className={`${!isMobile ? "" : "container"} mx-auto`}>
-          {!isMobile ? (
-            <Route path="/" exact component={HomeDesktop} />
-          ) : (
-            <Route path="/" exact component={Presentation} />
-          )}
+        <div className={`${!isMobile ? '' : 'container'} mx-auto`}>
+          {!isMobile ? <Route path="/" exact component={HomeDesktop}/> : <Route path="/" exact component={Presentation} />}
           <Route path="/create" exact component={CreateTeam} />
           <Route path="/list" component={ListTeam} />
           <Route path="/step2" component={Step2} />

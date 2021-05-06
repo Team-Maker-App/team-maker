@@ -19,9 +19,9 @@ module.exports = {
       sans: ["Inter", "sans-serif"],
     },
     extend: {
-      backgroundImage: (theme) => ({
-        wavyPattern: "url('/src/styles/svg/wavy-desktop.svg')",
-      }),
+      backgroundImage: theme => ({
+        'wavyPattern': "url('/src/styles/svg/wavy-desktop.svg')"
+      })
     },
   },
   variants: {
