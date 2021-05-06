@@ -3,6 +3,7 @@ import { filterPlayers, randomizePlayers } from "../../helpers";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import DatePicker from "../../components/DatePicker";
 
 const CreateTeam = () => {
   const [location, setLocation] = useLocalStorage("match-location", "");
@@ -121,26 +122,17 @@ const CreateTeam = () => {
           </button>
         </div>
         <p className="text-white font-sans ">Datos del partido</p>
-        <div className="flex gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <input
             type="text"
-            className=" rounded-md h-full p-2 block w-full shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
+            className="w-full rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
             placeholder="Lugar"
             onChange={(event) =>
               handleMatch({ ...match, location: event.target.value })
             }
             value={match.location}
           />
-          <input
-            type="datetime-local"
-            className=" w-1/4 rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300 "
-            placeholder="Fecha"
-            onChange={(event) =>
-              setMatch({ ...match, date: event.target.value })
-            }
-            min={today}
-            value={match.date}
-          />
+          <DatePicker />
         </div>
         {players.length > 0 && (
           <div className="flex items-center mt-4">

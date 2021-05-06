@@ -1,0 +1,23 @@
+.react-datepicker__day--selected {
+  background-color: #2c3590;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: #171f6d;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  background-color: #2c3590;
+}
+
+.react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected:hover {
+  background-color: #171f6d;
+}

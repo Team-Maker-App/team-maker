@@ -67,8 +67,8 @@ const ListTeam = ({ location }) => {
         navigator
           .share({
             title: "Team Maker",
-            text: "Esto esta compartido desde Team Maker",
-            url: window.location,
+            text: "Compartido desde Team Maker",
+            url: "https://teammaker.app/",
             files: [file],
           })
           .then(() => {
@@ -129,7 +129,7 @@ const ListTeam = ({ location }) => {
             className="relative flex justify-center mb-5 text-center gap-3"
           >
             <div className="relative w-1/2 bg-white rounded-md p-2">
-              <ShirtIcon color="white"/>
+              <ShirtIcon color="white" />
               <ul className="divide-y divide-gray-200">
                 {firstHalf?.map((player, index) => (
                   <li
@@ -145,7 +145,7 @@ const ListTeam = ({ location }) => {
               <Versus width={45} height={45} />
             </div>
             <div className="relative w-1/2 bg-white rounded-md p-2">
-              <ShirtIcon/>
+              <ShirtIcon />
               {/* <div className="flex border-b border-gray-200 justify-between items-center pb-3">
               <h3 className="text-md leading-4 font-medium ml-1 text-primaryDark">
                 Equipo 1
