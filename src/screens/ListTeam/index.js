@@ -20,6 +20,7 @@ const ListTeam = ({ location }) => {
   const history = useHistory();
   const { players, match } = location.state;
   const [firstHalf, setFH] = useState([]);
+  const [isCapturing, setIsCapturing] = useState(false);
   const [secondHalf, setSH] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -49,46 +50,50 @@ const ListTeam = ({ location }) => {
 
   const handleOnClick = () => {
     setLoading(true);
+    setIsCapturing(true);
 
-    html2canvas(content.current, {
-      allowTaint: true,
-      removeContainer: true,
-      backgroundColor: "#171f6d",
-      width: 550,
-      windowWidth: 550,
-      onclone: (clone) => {
-        const content = clone.querySelector(".screenshot");
-        const logo = (
-          <div className="w-full flex justify-center">
-            <Logo width={200} dark />
-          </div>
-        );
-        const stringComponent = ReactDOMServer.renderToString(logo);
+    setTimeout(() => {
+      html2canvas(content.current, {
+        allowTaint: true,
+        removeContainer: true,
+        backgroundColor: "#171f6d",
+        width: 550,
+        windowWidth: 550,
 
-        content.insertAdjacentHTML("afterbegin", stringComponent);
-      },
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/jpeg", 0.5);
-      const file = dataURLtoFile(imgData, "photo.jpg");
+        onclone: (clone) => {
+          const content = clone.querySelector(".screenshot");
+          const logo = (
+            <div className="w-full flex justify-center">
+              <Logo width={200} dark />
+            </div>
+          );
+          const stringComponent = ReactDOMServer.renderToString(logo);
 
-      if (navigator.share) {
-        navigator
-          .share({
-            title: "Team Maker",
-            text: "Compartido desde Team Maker",
-            url: "https://teammaker.app/",
-            files: [file],
-          })
-          .then(() => {
-            console.log("Successfully shared");
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error("Something went wrong sharing the blog", error);
-            setLoading(false);
-          });
-      }
-    });
+          content.insertAdjacentHTML("afterbegin", stringComponent);
+        },
+      }).then((canvas) => {
+        const imgData = canvas.toDataURL("image/jpeg", 0.5);
+        const file = dataURLtoFile(imgData, "photo.jpg");
+        setIsCapturing(false);
+        if (navigator.share) {
+          navigator
+            .share({
+              title: "Team Maker",
+              text: "Compartido desde Team Maker",
+              url: "https://teammaker.app/",
+              files: [file],
+            })
+            .then(() => {
+              console.log("Successfully shared");
+              setLoading(false);
+            })
+            .catch((error) => {
+              console.error("Something went wrong sharing the blog", error);
+              setLoading(false);
+            });
+        }
+      });
+    }, 500);
   };
 
   const truncate = (input) => {
@@ -99,7 +104,7 @@ const ListTeam = ({ location }) => {
   };
 
   return (
-    <Layout>
+    <Layout capturing={isCapturing}>
       <div className="flex flex-col">
         <div
           className="screenshot flex flex-col gap-5 p-4 pt-10 pb-16"
