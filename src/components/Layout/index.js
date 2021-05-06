@@ -9,7 +9,7 @@ const Layout = forwardRef(({ children }, ref) => (
       gridTemplateRows: "80px 1fr",
       height: "100vh",
     }}
-    className="background"
+    className="background container mx-auto"
   >
     <div className="grid place-items-center h-full w-full  bg-primaryDark shadow-xl">
       <Logo width={200} dark />
