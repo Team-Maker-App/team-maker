@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import DatePicker from "../../components/DatePicker";
+import Feedback from "../../components/Feedback/Feedback";
 
 const CreateTeam = () => {
   const [location, setLocation] = useLocalStorage("match-location", "");
@@ -123,6 +124,9 @@ const CreateTeam = () => {
             Crear equipos
           </button>
         </div>
+      </div>
+      <div className="w-full text-center p-4 pin-b">
+        <Feedback />
       </div>
     </Layout>
   );

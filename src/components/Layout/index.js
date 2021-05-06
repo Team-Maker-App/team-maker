@@ -18,7 +18,7 @@ const Layout = forwardRef(({ children, capturing }, ref) => (
     </div>
     {children}
     {capturing && (
-      <div className="bg-primaryDark grid place-items-center z-50 w-full h-full absolute">
+      <div className="bg-primaryDark grid place-items-center z-50 absolute h-screen w-screen">
         <div className="flex flex-col gap-3 items-center">
           <Logo width={200} dark />
           <span className="flex font-semibold gap-2 items-center opacity-70 text-white uppercase">

@@ -14,6 +14,7 @@ import ShirtIcon from "../../components/Icons/ShirtIcon";
 import ShareIcon from "../../components/Icons/ShareIcon";
 import SpinnerIcon from "../../components/Icons/SpinnerIcon";
 import Logo from "../../components/Logo";
+import Feedback from '../../components/Feedback/Feedback';
 
 const ListTeam = ({ location }) => {
   const content = useRef();
@@ -196,6 +197,9 @@ const ListTeam = ({ location }) => {
             </div>
           </Button>
         </div>
+      </div>
+      <div className="w-full text-center p-4 pin-b">
+        <Feedback />
       </div>
     </Layout>
   );
