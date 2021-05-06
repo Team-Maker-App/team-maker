@@ -8,12 +8,11 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "autoprefixer": "^9.8.6",
     "date-fns": "^2.16.1",
     "html2canvas": "^1.0.0-rc.7",
     "node-sass": "4.14.1",
-    "postcss": "^7.0.35",
     "react": "^17.0.1",
+    "react-datepicker2": "^3.3.13",
     "react-device-detect": "^1.15.0",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
@@ -21,15 +20,15 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "swiper": "^6.5.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
     "use-react-screenshot": "^1.0.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "start": "npm run watch:css && react-scripts start",
+    "build": "npm run watch:css && react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "watch:css": "postcss src/assets/styles.css -o src/assets/tailwind.css"
   },
   "eslintConfig": {
     "extends": [
@@ -48,5 +47,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "postcss-cli": "^8.3.1",
+    "tailwindcss": "^2.1.2"
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import "./assets/tailwind.css"
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ReactPWAInstallProvider from 'react-pwa-install';
