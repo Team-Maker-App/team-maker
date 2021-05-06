@@ -4,6 +4,14 @@ module.exports = {
   purge: ["./src/**/*.js", "./public/index.html"],
   darkMode: "media", // or 'media' or 'class'
   theme: {
+    container: {
+      screens: {
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+      },
+    },
     colors: {
       ...colors,
       primary: "#2C3590",
@@ -19,9 +27,9 @@ module.exports = {
       sans: ["Inter", "sans-serif"],
     },
     extend: {
-      backgroundImage: theme => ({
-        'wavyPattern': "url('/src/styles/svg/wavy-desktop.svg')"
-      })
+      backgroundImage: (theme) => ({
+        wavyPattern: "url('/src/styles/svg/wavy-desktop.svg')",
+      }),
     },
   },
   variants: {
