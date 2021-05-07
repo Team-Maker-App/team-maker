@@ -14,7 +14,7 @@ import ShirtIcon from "../../components/Icons/ShirtIcon";
 import ShareIcon from "../../components/Icons/ShareIcon";
 import SpinnerIcon from "../../components/Icons/SpinnerIcon";
 import Logo from "../../components/Logo";
-import Feedback from '../../components/Feedback/Feedback';
+import Feedback from "../../components/Feedback/Feedback";
 
 const ListTeam = ({ location }) => {
   const content = useRef();
@@ -49,52 +49,50 @@ const ListTeam = ({ location }) => {
     return new File([u8arr], filename, { type: mime });
   }
 
-  const handleOnClick = () => {
+  const handleOnClick = async () => {
     setLoading(true);
     setIsCapturing(true);
 
-    setTimeout(() => {
-      html2canvas(content.current, {
-        allowTaint: true,
-        removeContainer: true,
-        backgroundColor: "#171f6d",
-        width: 550,
-        windowWidth: 550,
+    const canvas = await html2canvas(content.current, {
+      allowTaint: true,
+      removeContainer: true,
+      backgroundColor: "#171f6d",
+      width: 550,
+      windowWidth: 550,
 
-        onclone: (clone) => {
-          const content = clone.querySelector(".screenshot");
-          const logo = (
-            <div className="w-full flex justify-center">
-              <Logo width={200} dark />
-            </div>
-          );
-          const stringComponent = ReactDOMServer.renderToString(logo);
+      onclone: (clone) => {
+        const content = clone.querySelector(".screenshot");
+        const logo = (
+          <div className="w-full flex justify-center">
+            <Logo width={200} dark />
+          </div>
+        );
+        const stringComponent = ReactDOMServer.renderToString(logo);
 
-          content.insertAdjacentHTML("afterbegin", stringComponent);
-        },
-      }).then((canvas) => {
-        const imgData = canvas.toDataURL("image/jpeg", 0.5);
-        const file = dataURLtoFile(imgData, "photo.jpg");
-        setIsCapturing(false);
-        if (navigator.share) {
-          navigator
-            .share({
-              title: "Team Maker",
-              text: "Compartido desde Team Maker",
-              url: "https://teammaker.app/",
-              files: [file],
-            })
-            .then(() => {
-              console.log("Successfully shared");
-              setLoading(false);
-            })
-            .catch((error) => {
-              console.error("Something went wrong sharing the blog", error);
-              setLoading(false);
-            });
-        }
-      });
-    }, 500);
+        content.insertAdjacentHTML("afterbegin", stringComponent);
+      },
+    });
+
+    const imgData = canvas.toDataURL("image/jpeg", 0.5);
+    const file = dataURLtoFile(imgData, "photo.jpg");
+    setIsCapturing(false);
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Team Maker",
+          text: "Compartido desde Team Maker",
+          url: "https://teammaker.app/",
+          files: [file],
+        })
+        .then(() => {
+          console.log("Successfully shared");
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Something went wrong sharing the blog", error);
+          setLoading(false);
+        });
+    }
   };
 
   const truncate = (input) => {
