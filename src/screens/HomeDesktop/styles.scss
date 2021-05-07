@@ -1,0 +1,10 @@
+.dots {
+  & button {
+    border-color: #2c3590 !important;
+    background: white !important;
+  }
+
+  & .react-multi-carousel-dot--active button {
+    background: #171f6d !important;
+  }
+}

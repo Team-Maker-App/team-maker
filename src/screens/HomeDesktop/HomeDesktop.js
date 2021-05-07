@@ -1,15 +1,17 @@
 import React from "react";
+import "./styles.scss";
+import "react-multi-carousel/lib/styles.css";
+
 import { ReactComponent as FormExample } from "../../styles/svg/undraw_text_field_htlv.svg";
 import { ReactComponent as RandomExample } from "../../styles/svg/undraw_random_thoughts_xejj.svg";
 import { ReactComponent as ShareExample } from "../../styles/svg/undraw_Social_media_re_w12q.svg";
 import { ReactComponent as Isotipo } from "../../styles/svg/isotipo.svg";
 
-import Button from "../../components/Button/Button";
 import { useHistory } from "react-router-dom";
 import Logo from "../../components/Logo";
+import Button from "../../components/Button/Button";
 
 import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
 import WavyDivider from "../../components/WavyDivider";
 
 const HomeDesktop = () => {
@@ -47,6 +49,7 @@ const HomeDesktop = () => {
         infinite={true}
         showDots={true}
         removeArrowOnDeviceType={["mobile", "table"]}
+        dotListClass="dots"
       >
         <div className="flex flex-col items-center gap-6">
           <FormExample width={402} height={220} />
