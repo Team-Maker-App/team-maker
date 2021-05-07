@@ -1,17 +1,18 @@
 import React from "react";
+import "./styles.scss";
 
 const WavyDivider = (props) => {
   return (
     <svg
-      viewBox="0 0 411 48"
-      fill="none"
+      version="1.1"
+      viewBox="0 0 148.1 8.0957"
       xmlns="http://www.w3.org/2000/svg"
+      fill="#171F6D"
       {...props}
     >
-      <path
-        d="M0 19.23s31.5 43.27 205.5 0c174-43.269 205.5 0 205.5 0V48H0V19.23z"
-        fill="#2C3590"
-      />
+      <g transform="translate(-25.771 -143.03)">
+        <path d="m25.771 147.21c44.524-13.283 97.977 10.342 148.1-0.90321v4.8173h-148.08z" />
+      </g>
     </svg>
   );
 };
