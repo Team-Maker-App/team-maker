@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./styles.scss";
 import "react-multi-carousel/lib/styles.css";
 
@@ -16,6 +16,11 @@ import WavyDivider from "../../components/WavyDivider";
 
 const HomeDesktop = () => {
   const history = useHistory();
+
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, []);
 
   const navigate = () => {
     history.push({
@@ -39,9 +44,9 @@ const HomeDesktop = () => {
   };
 
   return (
-    <div className=" bg-primaryDesktop flex flex-col h-screen pt-12">
+    <div className="home bg-primaryDesktop flex flex-col h-screen pt-12">
       <div className="grid place-items-center">
-        <Logo height={50} />
+        <Logo height={30} />
       </div>
       <Carousel
         responsive={responsive}
@@ -52,19 +57,19 @@ const HomeDesktop = () => {
         dotListClass="dots"
       >
         <div className="flex flex-col items-center gap-6">
-          <FormExample width={402} height={220} />
+          <FormExample width={300} height={"auto"} />
           <p className="font-sans text-center text-xl w-8/12">
             {"Escribe el nombre de las personas \n que van a participar"}
           </p>
         </div>
-        <div className="flex flex-col items-center gap-6">
-          <RandomExample width={402} height={220} />
+        <div className="flex flex-col items-center gap-6 bg-5">
+          <RandomExample width={300} height={"auto"} />
           <p className="font-sans text-center text-xl w-8/12">
             {"Team Maker se encarga\nde mezclarlos aleatoriamente"}
           </p>
         </div>
         <div className="flex flex-col items-center  gap-6">
-          <ShareExample height={220} width={402} />
+          <ShareExample height={"auto"} width={300} />
           <p className="font-sans text-center text-xl w-8/12">
             {"Comparti el resultado en donde quieras"}
           </p>
@@ -76,11 +81,11 @@ const HomeDesktop = () => {
       <div className="w-full h-48 bg-primaryDark ">
         <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
           <Isotipo className="hidden md:block" />
-          <Button className="p-6 px-8" action={navigate}>
-            <p className="font-sans text-center text-2xl text-primary">
-              {"Comenzar >"}
-            </p>
-          </Button>
+          <Button
+            text="Comenzar"
+            className="py-2 px-4 font-sans text-center text-xl text-primary"
+            action={navigate}
+          />
         </div>
       </div>
     </div>
