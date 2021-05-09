@@ -35,8 +35,6 @@ const ListTeam = ({ location }) => {
     }
   }, [players, history]);
 
-  console.log("match", match);
-
   function dataURLtoFile(dataurl, filename) {
     let arr = dataurl.split(","),
       mime = arr[0].match(/:(.*?);/)[1],
