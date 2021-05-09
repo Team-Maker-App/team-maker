@@ -1,15 +1,26 @@
-import React from 'react';
-import {ReactComponent as LogoDesktop} from '../../styles/svg/logo-desktop.svg';
-import {ReactComponent as FormExample} from '../../styles/svg/undraw_text_field_htlv.svg'
-import {ReactComponent as RandomExample} from '../../styles/svg/undraw_random_thoughts_xejj.svg'
-import {ReactComponent as ShareExample} from '../../styles/svg/undraw_Social_media_re_w12q.svg'
-import {ReactComponent as Logo} from '../../styles/svg/isotipo.svg';
-import Button from '../../components/Button/Button';
-import { useHistory } from "react-router-dom";
+import React, { useEffect } from "react";
+import "./styles.scss";
+import "react-multi-carousel/lib/styles.css";
 
+import { ReactComponent as FormExample } from "../../styles/svg/undraw_text_field_htlv.svg";
+import { ReactComponent as RandomExample } from "../../styles/svg/undraw_random_thoughts_xejj.svg";
+import { ReactComponent as ShareExample } from "../../styles/svg/undraw_Social_media_re_w12q.svg";
+import { ReactComponent as Isotipo } from "../../styles/svg/isotipo.svg";
+
+import { useHistory } from "react-router-dom";
+import Logo from "../../components/Logo";
+import Button from "../../components/Button/Button";
+
+import Carousel from "react-multi-carousel";
+import WavyDivider from "../../components/WavyDivider";
 
 const HomeDesktop = () => {
   const history = useHistory();
+
+  useEffect(() => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, []);
 
   const navigate = () => {
     history.push({
@@ -17,33 +28,64 @@ const HomeDesktop = () => {
     });
   };
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 4000, min: 1200 },
+      items: 3,
+    },
+    table: {
+      breakpoint: { max: 1200, min: 850 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 850, min: 0 },
+      items: 1,
+    },
+  };
+
   return (
-    <div className=" bg-primaryDesktop flex flex-col h-screen">
-      <div className="grid place-items-center m-5">
-        <LogoDesktop />
+    <div className="home bg-primaryDesktop flex flex-col h-screen pt-12">
+      <div className="grid place-items-center">
+        <Logo height={30} />
       </div>
-      <div className="container mx-auto flex flex-row justify-around items-center m-20 flex-1">
-        <div className="max-w-min md:w-1/3">
-          <FormExample width={402} height={220} />
-          <p className="font-sans text-center text-xl">{"Escribe el nombre de las personas \n que van a participar"}</p>
+      <Carousel
+        responsive={responsive}
+        containerClass="container mx-auto h-full mb-16"
+        infinite={true}
+        showDots={true}
+        removeArrowOnDeviceType={["mobile", "table"]}
+        dotListClass="dots"
+      >
+        <div className="flex flex-col items-center gap-6">
+          <FormExample width={300} height={"auto"} />
+          <p className="font-sans text-center text-xl w-8/12">
+            {"Escribe el nombre de las personas \n que van a participar"}
+          </p>
         </div>
-        <div className="max-w-min md:w-1/3">
-          <RandomExample width={402} height={220} />
-          <p className="font-sans text-center text-xl">{"Team Maker se encarga\nde mezclarlos aleatoriamente"}</p>
+        <div className="flex flex-col items-center gap-6 bg-5">
+          <RandomExample width={300} height={"auto"} />
+          <p className="font-sans text-center text-xl w-8/12">
+            {"Team Maker se encarga\nde mezclarlos aleatoriamente"}
+          </p>
         </div>
-        <div className="max-w-min md:w-1/3">
-          <ShareExample height={220} width={402} />
-          <p className="font-sans text-center text-xl">{"Comparti el resultado en donde quieras"}</p>
+        <div className="flex flex-col items-center  gap-6">
+          <ShareExample height={"auto"} width={300} />
+          <p className="font-sans text-center text-xl w-8/12">
+            {"Comparti el resultado en donde quieras"}
+          </p>
         </div>
+      </Carousel>
+      <div className="relative">
+        <WavyDivider className="w-full " />
       </div>
-      <div className="w-full h-60 flex justify-between items-center bg-wavyPattern">
-        <div className="pl-8 pr-8 mt-16">
-          <Logo />
-        </div>
-        <div className="pl-8 pr-8 mt-20">
-          <Button className="h-20 w-72" action={navigate}>
-            <p className="font-sans text-center text-3xl text-primary">{'Comenzar >'}</p>
-          </Button>
+      <div className="w-full h-48 bg-primaryDark ">
+        <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
+          <Isotipo className="hidden md:block" />
+          <Button
+            text="Comenzar"
+            className="py-2 px-4 font-sans text-center text-xl text-primary"
+            action={navigate}
+          />
         </div>
       </div>
     </div>

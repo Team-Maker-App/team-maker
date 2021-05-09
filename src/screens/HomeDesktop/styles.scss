@@ -1,0 +1,15 @@
+.home {
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.dots {
+  & button {
+    border-color: #2c3590 !important;
+    background: white !important;
+  }
+
+  & .react-multi-carousel-dot--active button {
+    background: #171f6d !important;
+  }
+}
