@@ -22,7 +22,8 @@
     "react-scripts": "4.0.1",
     "swiper": "^6.5.0",
     "use-react-screenshot": "^1.0.2",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "zustand": "^3.5.1"
   },
   "scripts": {
     "start": "craco start",

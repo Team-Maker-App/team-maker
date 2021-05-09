@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDatePicker from "react-datepicker";
 import { setDefaultLocale, registerLocale } from "react-datepicker";
+import { matchStore } from "../../store";
 import "react-datepicker/dist/react-datepicker.css";
 import "./styles.css";
 
@@ -9,13 +10,13 @@ registerLocale("es", es);
 setDefaultLocale("es");
 
 const DatePicker = () => {
-  const [startDate, setStartDate] = useState(new Date());
+  const { date, setDate } = matchStore();
 
   return (
     <ReactDatePicker
       showTimeSelect
-      selected={startDate}
-      onChange={(date) => setStartDate(date)}
+      selected={date}
+      onChange={(date) => setDate(date)}
       timeClassName={() => "text-primary"}
       locale="es"
       timeInputLabel="Time:"

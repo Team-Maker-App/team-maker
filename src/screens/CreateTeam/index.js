@@ -1,72 +1,47 @@
 import React, { useState } from "react";
-import { filterPlayers, randomizePlayers } from "../../helpers";
-import { useHistory } from "react-router-dom";
-import Layout from "../../components/Layout";
+import { randomizePlayers } from "../../helpers";
+import { useHistory } from "react-router";
+import { matchStore } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+
+//Components
+import Layout from "../../components/Layout";
 import DatePicker from "../../components/DatePicker";
 import Feedback from "../../components/Feedback/Feedback";
 
 const CreateTeam = () => {
-  const [location, setLocation] = useLocalStorage("match-location", "");
-  const [value, setValue] = useState([]);
-  const [players, setPlayers] = useState([]);
-
-  const today = `${new Date().getFullYear()}-${`${
-    new Date().getMonth() + 1
-  }`.padStart(2, 0)}-${`${new Date().getDate() + 1}`.padStart(
-    2,
-    0
-  )}T${`${new Date().getHours()}`.padStart(
-    2,
-    0
-  )}:${`${new Date().getMinutes()}`.padStart(2, 0)}`;
-
-  const [match, setMatch] = useState({
-    location,
-    date: today,
-  });
-
-  const handleMatch = (value) => {
-    setMatch(value);
-    setLocation(value.location);
-  };
+  const { location, setLocation, players, setPlayers } = matchStore();
+  const [persistLocation, setPersistLocation] = useLocalStorage("match-location", location);
+  const [value, setValue] = useState("");
   const history = useHistory();
-
-  const placeholder = `Jugador1\nJugador2\nJugador3\nJugador4\nJugador5....
-  `;
-
-  const handlePlayers = (value) => {
-    setValue(value);
-    const separatedByLineAndComma = filterPlayers(value);
-    setPlayers(separatedByLineAndComma);
-  };
 
   const handlePaste = () => {
     navigator.clipboard.readText().then((clipText) => {
-      handlePlayers(clipText);
+      setPlayers(clipText);
     });
   };
 
   const CreateTeams = () => {
-    randomizePlayers(players);
-    history.push({
-      pathname: "/list",
-      state: { players, match },
-    });
+    const randomPlayers = randomizePlayers(players);
+    setPlayers(randomPlayers);
+    setLocation(persistLocation);
+    if (players) history.push({ pathname: "/list" });
+  };
+
+  const handlePlayers = (players) => {
+    setPlayers(players);
+    setValue(players);
   };
 
   return (
     <Layout>
       <div className="flex flex-col p-5 gap-6 max-w-screen-xl mx-auto w-full">
-        <div
-          className="flex flex-col flex-auto w-full relative"
-          style={{ maxHeight: "400px" }}
-        >
+        <div className="flex flex-col flex-auto w-full relative" style={{ maxHeight: "400px" }}>
           <textarea
             className="p-4 w-full flex-1 rounded-md resize-none"
             onChange={(e) => handlePlayers(e.target.value)}
             value={value}
-            placeholder={placeholder}
+            placeholder={`Jugador1\nJugador2\nJugador3\nJugador4\nJugador5 ...`}
           />
           <div className="flex gap-x-2 absolute bottom-5 right-5">
             <div
@@ -74,9 +49,7 @@ const CreateTeam = () => {
                 players.length > 0 ? "opacity-100" : "opacity-0"
               }`}
             >
-              <span className=" text-2xl">
-                {players.length > 0 ? players.length : ""}
-              </span>
+              <span className=" text-2xl">{players.length > 0 ? players.length : ""}</span>
             </div>
             <button
               onClick={() => handlePaste()}
@@ -106,10 +79,8 @@ const CreateTeam = () => {
             type="text"
             className="w-full rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
             placeholder="Lugar"
-            onChange={(event) =>
-              handleMatch({ ...match, location: event.target.value })
-            }
-            value={match.location}
+            onChange={(e) => setPersistLocation(e.target.value)}
+            value={persistLocation}
           />
           <DatePicker />
         </div>
