@@ -8,6 +8,12 @@
   "description": "Crea la lista, TeamMaker los mezcla por vos y comparte el resultado donde quieras!",
   "icons": [
     {
+      "src": "/icons/maskable_icon.png",
+      "sizes": "400x400",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
