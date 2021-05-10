@@ -1,5 +1,11 @@
 {
-  "name": "TeamMaker",
+  "short_name": "TeamMaker",
+  "name": "Crea tu lista con TeamMaker",
+  "start_url": "/",
+  "background_color": "#fff",
+  "theme_color": "#171F6D",
+  "description": "Crea la lista, TeamMaker los mezcla por vos y compartí el resultado donde quieras!",
+  "display": "standalone",
   "icons": [
     {
       "src": "/android-icon-36x36.png",
