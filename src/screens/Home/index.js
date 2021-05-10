@@ -24,9 +24,7 @@ const Home = () => {
   }, []);
 
   const navigate = () => {
-    history.push({
-      pathname: "/create",
-    });
+    history.push({ pathname: "/create" });
   };
 
   const responsive = {
@@ -44,52 +42,53 @@ const Home = () => {
     },
   };
 
+  const CarrouselItem = ({ SVG, text }) => {
+    return (
+      <>
+        <div className="flex items-end justify-center h-full">
+          <SVG className="w-full h-auto object-cover md:w-9/12" />
+        </div>
+        <p className="font-sans text-center text-xl">{text}</p>
+      </>
+    );
+  };
+
   return (
-    <div className="home bg-primaryDesktop flex flex-col h-screen pt-12">
-      <div className="grid place-items-center">
+    <div className="home bg-primaryDesktop">
+      <section className="flex justify-center items-center h-full">
         <Logo height={30} />
-      </div>
+      </section>
       <Carousel
         responsive={responsive}
-        containerClass="container mx-auto h-full mb-16"
         infinite={true}
         showDots={true}
-        removeArrowOnDeviceType={["mobile", "table"]}
+        removeArrowOnDeviceType={["mobile", "table", "desktop"]}
         dotListClass="dots"
+        containerClass="container mx-auto h-full"
+        itemClass="carousel__item"
       >
-        <div className="flex flex-col items-center gap-6">
-          <FormExample width={300} height={"auto"} />
-          <p className="font-sans text-center text-xl w-8/12">
-            {"Escribe el nombre de las personas \n que van a participar"}
-          </p>
-        </div>
-        <div className="flex flex-col items-center gap-6 bg-5">
-          <RandomExample width={300} height={"auto"} />
-          <p className="font-sans text-center text-xl w-8/12">
-            {"Team Maker se encarga\nde mezclarlos aleatoriamente"}
-          </p>
-        </div>
-        <div className="flex flex-col items-center  gap-6">
-          <ShareExample height={"auto"} width={300} />
-          <p className="font-sans text-center text-xl w-8/12">{"Comparti el resultado en donde quieras"}</p>
-        </div>
+        <CarrouselItem text="Escribe el nombre de las personas que van a participar" SVG={FormExample} />
+        <CarrouselItem text="Team Maker se encarga de mezclarlos aleatoriamente" SVG={RandomExample} />
+        <CarrouselItem text="Comparte el resultado en donde quieras" SVG={ShareExample} />
       </Carousel>
-      <div className="relative">
-        <WavyDivider className="w-full " />
-      </div>
-      <div className="w-full h-48 bg-primaryDark ">
-        <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
-          <Isotipo className="hidden md:block" />
-          <div className="flex gap-3">
-            <InstallPWA />
-            <Button
-              text="Comenzar"
-              className="py-2 px-4 font-sans text-center text-xl text-primary"
-              action={navigate}
-            />
+      <section className="flex flex-col h-full">
+        <div className="relative">
+          <WavyDivider className="w-full" />
+        </div>
+        <div className="w-full h-full pb-0 pt-2 md:p-2 bg-primaryDark ">
+          <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
+            <Isotipo className="hidden md:block h-12" />
+            <div className="flex gap-3">
+              <InstallPWA />
+              <Button
+                text="Comenzar"
+                className="py-2 px-4 font-sans text-center text-xl text-primary"
+                action={navigate}
+              />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };
