@@ -150,7 +150,7 @@ const ListTeam = () => {
         </div>
         <div className="flex justify-center items-center">
           <Button action={handleOnClick}>
-            <div className="flex gap-4 w-full justify-center items-center">
+            <div className="flex gap-4 w-full justify-center items-center px-6">
               <span className="text-gray-800">Compartir</span>
               <ShareIcon className="w-4 h-4 text-primary" />
             </div>

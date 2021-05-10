@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
+import { ImDownload } from "react-icons/im";
 
 const InstallPWA = () => {
   const [supportsPWA, setSupportsPWA] = useState(false);
@@ -28,7 +29,7 @@ const InstallPWA = () => {
     };
   }, []);
 
-  const onClick = (evt) => {
+  const handleInstall = (evt) => {
     evt.preventDefault();
     if (!promptInstall) {
       return;
@@ -40,13 +41,11 @@ const InstallPWA = () => {
     return null;
   }
   return (
-    <Button
-      aria-label="Install app"
-      title="Install app"
-      text="Instalar"
-      className="py-2 px-4 font-sans text-center text-xl text-primary"
-      action={onClick}
-    />
+    <>
+      <Button className="px-6" aria-label="Install app" title="Install app" action={handleInstall}>
+        <ImDownload size={20} color="#171F6D" />
+      </Button>
+    </>
   );
 };
 
