@@ -17,7 +17,7 @@ const CreateTeam = () => {
 
   const handlePaste = () => {
     navigator.clipboard.readText().then((clipText) => {
-      setPlayers(clipText);
+      handlePlayers(clipText);
     });
   };
 
