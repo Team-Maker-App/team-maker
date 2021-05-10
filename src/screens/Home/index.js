@@ -13,6 +13,7 @@ import Button from "../../components/Button/Button";
 
 import Carousel from "react-multi-carousel";
 import WavyDivider from "../../components/WavyDivider";
+import InstallPWA from "../../components/InstallPWA";
 
 const Home = () => {
   const history = useHistory();
@@ -70,9 +71,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col items-center  gap-6">
           <ShareExample height={"auto"} width={300} />
-          <p className="font-sans text-center text-xl w-8/12">
-            {"Comparti el resultado en donde quieras"}
-          </p>
+          <p className="font-sans text-center text-xl w-8/12">{"Comparti el resultado en donde quieras"}</p>
         </div>
       </Carousel>
       <div className="relative">
@@ -81,11 +80,14 @@ const Home = () => {
       <div className="w-full h-48 bg-primaryDark ">
         <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
           <Isotipo className="hidden md:block" />
-          <Button
-            text="Comenzar"
-            className="py-2 px-4 font-sans text-center text-xl text-primary"
-            action={navigate}
-          />
+          <div className="flex gap-3">
+            <InstallPWA />
+            <Button
+              text="Comenzar"
+              className="py-2 px-4 font-sans text-center text-xl text-primary"
+              action={navigate}
+            />
+          </div>
         </div>
       </div>
     </div>
