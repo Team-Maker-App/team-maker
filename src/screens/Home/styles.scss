@@ -1,8 +1,25 @@
 .home {
+  display: grid;
+  grid-template-rows: 80px 1fr 120px;
+  gap: 1rem;
   height: 100vh; /* Fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
-}
 
+  .carousel__item {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr;
+    padding: 2rem;
+    padding-top: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 620px) {
+    & {
+      grid-template-rows: 100px 1fr minmax(min-content, 160px);
+    }
+  }
+}
 .dots {
   & button {
     border-color: #2c3590 !important;
@@ -12,4 +29,8 @@
   & .react-multi-carousel-dot--active button {
     background: #171f6d !important;
   }
+}
+
+.react-multi-carousel-track {
+  height: 100% !important;
 }
