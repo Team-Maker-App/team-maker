@@ -1,7 +1,10 @@
 import React, { forwardRef, useEffect } from "react";
 import "./styles.scss";
 import Logo from "../Logo";
+
+// Components
 import SpinnerIcon from "../../components/Icons/SpinnerIcon";
+import InstallPWA from "../../components/InstallPWA";
 
 const Layout = forwardRef(({ children, capturing }, ref) => {
   useEffect(() => {
@@ -17,8 +20,11 @@ const Layout = forwardRef(({ children, capturing }, ref) => {
       }}
       className={`layout background ${capturing ? "" : "container mx-auto"}`}
     >
-      <div className="grid place-items-center h-full w-full  bg-primaryDark shadow-xl">
+      <div className="grid place-items-center h-full w-full bg-primaryDark shadow-xl relative">
         <Logo width={200} dark />
+        <div className="absolute right-4">
+          <InstallPWA />
+        </div>
       </div>
       {children}
       {capturing && (

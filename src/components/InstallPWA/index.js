@@ -13,6 +13,7 @@ const InstallPWA = () => {
       setSupportsPWA(true);
       setPromptInstall(e);
     };
+
     window.addEventListener("beforeinstallprompt", handler);
 
     window.addEventListener("appinstalled", () => {
