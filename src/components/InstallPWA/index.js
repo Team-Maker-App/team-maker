@@ -14,11 +14,18 @@ const InstallPWA = () => {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
+    window.addEventListener("appinstalled", () => {
+      setIsInstalled(true);
+    });
+
     if (window.matchMedia("(display-mode: standalone)").matches) {
       setIsInstalled(true);
     }
 
-    return () => window.removeEventListener("transitionend", handler);
+    return () => {
+      window.removeEventListener("transitionend", handler);
+      window.removeEventListener("appinstalled", handler);
+    };
   }, []);
 
   const onClick = (evt) => {
