@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { randomizePlayers } from "../../helpers";
 import { useHistory } from "react-router";
-import { matchStore } from "../../store";
+import matchStore from "../../store/matchStore";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 //Components

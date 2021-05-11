@@ -1,9 +1,13 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// Components
 
+// Screens
 import CreateTeam from "./screens/CreateTeam";
 import ListTeam from "./screens/ListTeam";
 import Home from "./screens/Home";
+import Match from "./screens/Match";
+
+// Components
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -11,8 +15,10 @@ function App() {
       <div className="w-full bg-primaryDark">
         <Route path="/" exact component={Home} />
         <Route path="/create" exact component={CreateTeam} />
-        <Route path="/list" component={ListTeam} />
+        <Route path="/list" exact component={ListTeam} />
+        <Route path="/match/:id" exact component={Match} />
       </div>
+      <Modal />
     </Router>
   );
 }
