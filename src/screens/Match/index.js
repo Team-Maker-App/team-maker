@@ -9,10 +9,13 @@ import { es } from "date-fns/esm/locale";
 import Layout from "../../components/Layout";
 import Feedback from "../../components/Feedback/Feedback";
 import { FaTrashAlt } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 const Match = ({ match }) => {
   const [data, setData] = useState({});
+  const [visible, setVisible] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(true);
   const { location, admin, max_players, players, date } = data;
   const dbMatch = db.collection("matches").doc(match.params.id);
 
@@ -38,7 +41,15 @@ const Match = ({ match }) => {
         {!loading && (
           <div className="flex flex-col">
             <div className="screenshot flex flex-col gap-5 p-4 pt-10 pb-16">
-              <div className="col-span-1 flex shadow-sm rounded-md w-full mx-auto">
+              <div className="relative col-span-1 flex shadow-sm rounded-md w-full mx-auto">
+                {isAdmin && (
+                  <button
+                    type="button"
+                    class="absolute top-2 right-2  inline-flex items-center p-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  >
+                    <MdEdit className="h-5 w-5 text-cyan-800" />
+                  </button>
+                )}
                 <div className="flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md">
                   <svg
                     width={30}
@@ -83,14 +94,21 @@ const Match = ({ match }) => {
                   {players
                     ?.filter((_, i) => i < max_players)
                     .map((player, i) => (
-                      <li key={player} class="flex justify-between items-center h-10">
+                      <li
+                        key={player}
+                        onMouseEnter={() => setVisible(i)}
+                        onMouseLeave={() => setVisible(null)}
+                        class="flex justify-between items-center h-10"
+                      >
                         <span className="pl-6">{`${i + 1}. ${player}`}</span>
-                        <button
-                          onClick={() => handleDelete(player)}
-                          className="flex justify-center items-center h-full w-12 bg-red-200"
-                        >
-                          <FaTrashAlt className="text-red-800" />
-                        </button>
+                        {isAdmin && visible === i && (
+                          <button
+                            onClick={() => handleDelete(player)}
+                            className="flex justify-center items-center h-full w-12 bg-red-200"
+                          >
+                            <FaTrashAlt className="text-red-800" />
+                          </button>
+                        )}
                       </li>
                     ))}
                 </ul>
