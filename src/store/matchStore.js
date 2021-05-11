@@ -2,7 +2,7 @@ import create from "zustand";
 import { devtools } from "zustand/middleware";
 import { filterPlayers } from "../helpers";
 
-export const matchStore = create(
+const matchStore = create(
   devtools(
     (set) => ({
       players: [],
@@ -15,3 +15,5 @@ export const matchStore = create(
     "matchStore"
   )
 );
+
+export default matchStore;

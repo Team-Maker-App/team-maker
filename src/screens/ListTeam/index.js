@@ -14,7 +14,7 @@ import ShirtIcon from "../../components/Icons/ShirtIcon";
 import ShareIcon from "../../components/Icons/ShareIcon";
 import Logo from "../../components/Logo";
 import Feedback from "../../components/Feedback/Feedback";
-import { matchStore } from "../../store";
+import matchStore from "../../store/matchStore";
 
 const ListTeam = () => {
   const content = useRef();

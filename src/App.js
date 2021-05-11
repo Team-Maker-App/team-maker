@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Route } from "react-router-dom";
-// Components
 
+// Screens
 import CreateTeam from "./screens/CreateTeam";
 import ListTeam from "./screens/ListTeam";
 import Home from "./screens/Home";
 import Match from "./screens/Match";
+
+// Components
+import Modal from "./components/Modal";
 
 function App() {
   return (
@@ -15,6 +18,7 @@ function App() {
         <Route path="/list" exact component={ListTeam} />
         <Route path="/match/:id" exact component={Match} />
       </div>
+      <Modal />
     </Router>
   );
 }
