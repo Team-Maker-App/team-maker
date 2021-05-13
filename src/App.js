@@ -10,8 +10,17 @@ import Login from "./screens/Login";
 // Components
 import Modal from "./components/Modal";
 import { useLocalStorage } from "./hooks/useLocalStorage";
+import userStore from "./store/userStore";
+import { useEffect } from "react";
 
 function App() {
+  const { singInUser } = userStore();
+  const [UID] = useLocalStorage("uid");
+
+  useEffect(() => {
+    if (UID) singInUser({ uid: UID });
+  }, [UID, singInUser]);
+
   return (
     <Router>
       <div className="w-full bg-primaryDark">
@@ -28,6 +37,7 @@ function App() {
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const [UID] = useLocalStorage("uid");
+
   return (
     <Route
       {...rest}
