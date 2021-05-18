@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import { toast } from "react-toastify";
 
 const config = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
@@ -16,6 +17,12 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 firebase.analytics();
+
+const errorCodes = {
+  "auth/too-many-requests": "Demasiados intentos fallidos de inicio de sesión. Aguarde unos minutos.",
+  "auth/wrong-password": "La contraseña no es válida o el usuario no tiene contraseña.",
+  default: "Error al iniciar sesion, intente en unos minutos.",
+};
 
 export const getUserByUID = (uid) => {
   return new Promise((resolve, reject) => {
@@ -56,11 +63,11 @@ export const signIn = (email, password) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((credential) => {
-        console.log("🚀 ~ .then ~ credential", credential);
         resolve(credential.user);
       })
       .catch((error) => {
-        reject(error);
+        toast.error(errorCodes[error?.code] || errorCodes.default);
+        reject(errorCodes[error?.code] || errorCodes.default);
       });
   });
 };
