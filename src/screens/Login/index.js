@@ -17,7 +17,6 @@ const Login = () => {
   const onSubmit = (data) => {
     const { email, password } = data;
     signIn(email, password).then((data) => {
-      console.log("🚀 ~onSubmit ~ signIn ~ data", data)
       navigate()
       setUID(data.uid)});
   };
@@ -25,7 +24,6 @@ const Login = () => {
   const onCreate = (data) => {
     const { email, password } = data;
     createUser(email, password).then((data) => {
-      console.log("🚀 ~onCreate ~ signIn ~ data", data)
       navigate()
       setUID(data.uid)});
   };

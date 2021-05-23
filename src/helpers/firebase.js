@@ -56,7 +56,6 @@ export const signIn = (email, password) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((credential) => {
-        console.log("🚀 ~ .then ~ credential", credential);
         resolve(credential.user);
       })
       .catch((error) => {
@@ -71,11 +70,9 @@ export const createUser = (email, password) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((credential) => {
-        console.log("🚀 ~ create User ~ .then ~ credential", credential)
         resolve(credential.user);
       })
       .catch((error) => {
-        console.log("🚀 ~ create User error ~ returnnewPromise ~ error", error)
         reject(error)
       })
   })
