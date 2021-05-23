@@ -64,3 +64,19 @@ export const signIn = (email, password) => {
       });
   });
 };
+
+export const createUser = (email, password) => {
+  return new Promise((resolve, reject) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((credential) => {
+        console.log("🚀 ~ create User ~ .then ~ credential", credential)
+        resolve(credential.user);
+      })
+      .catch((error) => {
+        console.log("🚀 ~ create User error ~ returnnewPromise ~ error", error)
+        reject(error)
+      })
+  })
+}

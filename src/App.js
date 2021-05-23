@@ -24,10 +24,10 @@ function App() {
   return (
     <Router>
       <div className="w-full bg-primaryDark">
+        <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
-        <PrivateRoute path="/" exact component={Home} />
-        <PrivateRoute path="/create" exact component={CreateTeam} />
-        <PrivateRoute path="/list" exact component={ListTeam} />
+        <Route path="/create" exact component={CreateTeam} />
+        <Route path="/list" exact component={ListTeam} />
         <PrivateRoute path="/match/:id" exact component={Match} />
       </div>
       <Modal />

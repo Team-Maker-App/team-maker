@@ -27,6 +27,10 @@ const Home = () => {
     history.push({ pathname: "/create" });
   };
 
+  const navigateToLogin = () => {
+    history.push({ pathname: "/login" });
+  };
+
   const responsive = {
     desktop: {
       breakpoint: { max: 4000, min: 1200 },
@@ -80,6 +84,7 @@ const Home = () => {
             <Isotipo className="hidden md:block h-12" />
             <div className="flex gap-3">
               <InstallPWA />
+              <p onClick={navigateToLogin} className="py-2 px-4 font-sans text-center text-xl text-white underline cursor-pointer" >Ingresar</p>
               <Button
                 text="Comenzar"
                 className="py-2 px-4 font-sans text-center text-xl text-primary"

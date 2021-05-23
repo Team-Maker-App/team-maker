@@ -1,16 +1,33 @@
 import React from "react";
 import Layout from "../../components/Layout";
+import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { signIn } from "../../helpers/firebase";
+import { signIn, createUser } from "../../helpers/firebase";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [_, setUID] = useLocalStorage("uid");
+  const history = useHistory();
+
+  const navigate = () => {
+    history.push({ pathname: "/create" });
+  };
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    signIn(email, password).then((data) => setUID(data.uid));
+    signIn(email, password).then((data) => {
+      console.log("🚀 ~onSubmit ~ signIn ~ data", data)
+      navigate()
+      setUID(data.uid)});
+  };
+
+  const onCreate = (data) => {
+    const { email, password } = data;
+    createUser(email, password).then((data) => {
+      console.log("🚀 ~onCreate ~ signIn ~ data", data)
+      navigate()
+      setUID(data.uid)});
   };
 
   return (
@@ -57,6 +74,9 @@ const Login = () => {
               >
                 Ingresar
               </button>
+              <div>
+              </div>
+              <p onClick={handleSubmit(onCreate)} className="flex justify-center underline text-primary cursor-pointer py-2 px-4">Crear usuario</p>
             </div>
           </form>
         </div>
