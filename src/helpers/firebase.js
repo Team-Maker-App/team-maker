@@ -56,7 +56,6 @@ export const signIn = (email, password) => {
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((credential) => {
-        console.log("🚀 ~ .then ~ credential", credential);
         resolve(credential.user);
       })
       .catch((error) => {
@@ -64,3 +63,17 @@ export const signIn = (email, password) => {
       });
   });
 };
+
+export const createUser = (email, password) => {
+  return new Promise((resolve, reject) => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((credential) => {
+        resolve(credential.user);
+      })
+      .catch((error) => {
+        reject(error)
+      })
+  })
+}
