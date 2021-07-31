@@ -5,47 +5,35 @@ import { useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/esm/locale";
 import html2canvas from "html2canvas";
+import { matchStore } from "../../store";
+import { dataURLtoFile } from "../../helpers";
 
 // Components
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button/Button";
 import Layout from "../../components/Layout";
-import ShirtIcon from "../../components/Icons/ShirtIcon";
 import ShareIcon from "../../components/Icons/ShareIcon";
 import Logo from "../../components/Logo";
 import Feedback from "../../components/Feedback/Feedback";
-import { matchStore } from "../../store";
+import PlayersList from "./PlayersList";
 
 const ListTeam = () => {
   const content = useRef();
   const history = useHistory();
-  const [firstHalf, setFH] = useState([]);
-  const [isCapturing, setIsCapturing] = useState(false);
-  const [secondHalf, setSH] = useState([]);
-
   const { location, players, date } = matchStore();
 
+  const [isCapturing, setIsCapturing] = useState(false);
+
+  const half = Math.ceil(players?.length / 2);
+
+  const firstHalf = players?.slice(0, half);
+  const secondHalf = players?.slice(-half);
+
   useEffect(() => {
-    if (players.length > 0) {
-      const half = Math.ceil(players?.length / 2);
-      setFH(players.splice(0, half));
-      setSH(players.splice(-half));
-    } else {
+    if (players.length === 0) {
       history.push("/create");
     }
-  }, [players, history]);
-
-  function dataURLtoFile(dataurl, filename) {
-    let arr = dataurl.split(","),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
-  }
+  }, [history, players.length]);
 
   const handleOnClick = async () => {
     setIsCapturing(true);
@@ -86,13 +74,6 @@ const ListTeam = () => {
     }, 300);
   };
 
-  const truncate = (input) => {
-    if (input.length > 15) {
-      return input.substring(0, 15) + "...";
-    }
-    return input;
-  };
-
   return (
     <Layout capturing={isCapturing}>
       <div className="flex flex-col">
@@ -117,34 +98,16 @@ const ListTeam = () => {
                   })}
                   hs
                 </p>
-                <p className="text-gray-500">12 Jugadores</p>
+                <p className="text-gray-500">{players?.length} Jugadores</p>
               </div>
             </div>
           </div>
           <div style={{ minHeight: "100px" }} className="relative flex justify-center mb-5 text-center gap-3">
-            <div className="relative w-1/2 bg-white rounded-md p-2">
-              <ShirtIcon color="white" />
-              <ul className="divide-y divide-gray-200">
-                {firstHalf?.map((player, index) => (
-                  <li key={index} className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center">
-                    {truncate(player)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <PlayersList players={firstHalf} color="#FFFFFF" />
             <div className="z-10 absolute bottom-3">
               <Versus width={45} height={45} />
             </div>
-            <div className="relative w-1/2 bg-white rounded-md p-2">
-              <ShirtIcon />
-              <ul className="divide-y divide-gray-200">
-                {secondHalf?.map((player, index) => (
-                  <li key={index} className="py-1 flex font-display text-lg p-1 my-2 capitalize justify-center">
-                    {truncate(player)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <PlayersList players={secondHalf} color="#2C3590" />
           </div>
           <Alert text={listTeamStrings.position} />
         </div>

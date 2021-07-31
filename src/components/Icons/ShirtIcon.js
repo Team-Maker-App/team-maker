@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import * as React from "react";
 
 function ShirtIcon({ color, size = 30, ...rest }) {
@@ -30,5 +31,10 @@ function ShirtIcon({ color, size = 30, ...rest }) {
     </svg>
   );
 }
+
+ShirtIcon.propTypes = {
+  color: PropTypes.any,
+  size: PropTypes.number,
+};
 
 export default ShirtIcon;
