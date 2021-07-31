@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, useEffect } from "react";
 import "./styles.scss";
 import Logo from "../Logo";
@@ -6,7 +7,7 @@ import Logo from "../Logo";
 import SpinnerIcon from "../../components/Icons/SpinnerIcon";
 import InstallPWA from "../../components/InstallPWA";
 
-const Layout = forwardRef(({ children, capturing }, ref) => {
+const ButtonFunction = ({ children, capturing }, ref) => {
   useEffect(() => {
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
@@ -40,6 +41,13 @@ const Layout = forwardRef(({ children, capturing }, ref) => {
       )}
     </div>
   );
-});
+};
+
+ButtonFunction.propTypes = {
+  capturing: PropTypes.any,
+  children: PropTypes.any,
+};
+
+const Layout = forwardRef(ButtonFunction);
 
 export default Layout;

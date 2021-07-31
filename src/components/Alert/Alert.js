@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { ReactComponent as Info } from "../../styles/svg/exclamation.svg";
 
@@ -10,6 +11,10 @@ const Alert = ({ text }) => {
       <p className="text-sm pr-3">{text}</p>
     </div>
   );
+};
+
+Alert.propTypes = {
+  text: PropTypes.any,
 };
 
 export default Alert;
