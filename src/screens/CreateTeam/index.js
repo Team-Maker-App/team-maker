@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { randomizePlayers } from "../../helpers";
 import { useHistory } from "react-router";
 import { matchStore } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
@@ -8,6 +7,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Layout from "../../components/Layout";
 import DatePicker from "../../components/DatePicker";
 import Feedback from "../../components/Feedback/Feedback";
+import { shuffle } from "lodash";
 
 const CreateTeam = () => {
   const { location, setLocation, players, setPlayers } = matchStore();
@@ -22,7 +22,7 @@ const CreateTeam = () => {
   };
 
   const CreateTeams = () => {
-    const randomPlayers = randomizePlayers(players);
+    const randomPlayers = shuffle(players);
     setPlayers(randomPlayers);
     setLocation(persistLocation);
     if (players) history.push({ pathname: "/list" });
