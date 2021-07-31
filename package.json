@@ -9,7 +9,9 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "date-fns": "^2.16.1",
+    "framer-motion": "^4.1.17",
     "html2canvas": "^1.0.0-rc.7",
+    "lodash": "^4.17.21",
     "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-datepicker": "^3.8.0",
@@ -30,7 +32,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-        "lint": "eslint . || exit 0"
+    "lint": "eslint . || exit 0"
   },
   "eslintConfig": {
     "extends": [

@@ -16,6 +16,8 @@ import ShareIcon from "../../components/Icons/ShareIcon";
 import Logo from "../../components/Logo";
 import Feedback from "../../components/Feedback/Feedback";
 import PlayersList from "./PlayersList";
+import { shuffle } from "lodash";
+import { AnimateSharedLayout, motion } from "framer-motion";
 
 const ListTeam = () => {
   const content = useRef();
@@ -23,17 +25,27 @@ const ListTeam = () => {
   const { location, players, date } = matchStore();
 
   const [isCapturing, setIsCapturing] = useState(false);
+  const [names, setNames] = useState(players);
+  const [shuffling, setShuffling] = useState(true);
 
   const half = Math.ceil(players?.length / 2);
 
-  const firstHalf = players?.slice(0, half);
-  const secondHalf = players?.slice(-half);
+  const firstHalf = names?.slice(0, half);
+  const secondHalf = names?.slice(-half);
 
   useEffect(() => {
     if (players.length === 0) {
       history.push("/create");
     }
   }, [history, players.length]);
+
+  useEffect(() => {
+    if (shuffling) setTimeout(() => setNames(shuffle(names)), 600);
+  }, [names, shuffling]);
+
+  useEffect(() => {
+    setTimeout(() => setShuffling(false), 3600);
+  }, []);
 
   const handleOnClick = async () => {
     setIsCapturing(true);
@@ -74,10 +86,23 @@ const ListTeam = () => {
     }, 300);
   };
 
+  const variants = {
+    idle: { x: 0, rotate: [-0.5, 0.5, -0.4, 0.4, -0.2, 0.2, 0], transition: { type: "spring" } },
+    shuffling: {
+      x: [0.2, -0.2],
+      rotate: [0.5, -0.5],
+      transition: {
+        flip: Infinity,
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <Layout capturing={isCapturing}>
       <div className="flex flex-col">
-        <div className="screenshot flex flex-col gap-5 p-4 pt-10 pb-16" ref={content}>
+        <div className="screenshot flex flex-col gap-5 p-4" ref={content}>
           <div className="col-span-1 flex shadow-sm rounded-md w-full mx-auto">
             <div className="flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md">
               <svg width={30} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,13 +127,21 @@ const ListTeam = () => {
               </div>
             </div>
           </div>
-          <div style={{ minHeight: "100px" }} className="relative flex justify-center mb-5 text-center gap-3">
-            <PlayersList players={firstHalf} color="#FFFFFF" />
-            <div className="z-10 absolute bottom-3">
-              <Versus width={45} height={45} />
-            </div>
-            <PlayersList players={secondHalf} color="#2C3590" />
-          </div>
+          <AnimateSharedLayout>
+            <motion.div
+              initial="idle"
+              animate={shuffling ? "shuffling" : "idle"}
+              variants={variants}
+              style={{ minHeight: "100px" }}
+              className="relative flex justify-center mb-5 text-center gap-3"
+            >
+              <PlayersList players={firstHalf} color="#FFFFFF" />
+              <div className="z-10 absolute bottom-3">
+                <Versus width={45} height={45} />
+              </div>
+              <PlayersList players={secondHalf} color="#2C3590" />
+            </motion.div>
+          </AnimateSharedLayout>
           <Alert text={listTeamStrings.position} />
         </div>
         <div className="flex justify-center items-center">

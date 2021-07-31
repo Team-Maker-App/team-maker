@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import "./styles.scss";
 import "react-multi-carousel/lib/styles.css";
@@ -42,17 +43,6 @@ const Home = () => {
     },
   };
 
-  const CarrouselItem = ({ SVG, text }) => {
-    return (
-      <>
-        <div className="flex items-end justify-center h-full">
-          <SVG className="w-full h-auto object-cover md:w-9/12" />
-        </div>
-        <p className="font-sans text-center text-xl">{text}</p>
-      </>
-    );
-  };
-
   return (
     <div className="home bg-primaryDesktop">
       <section className="flex justify-center items-center h-full">
@@ -67,9 +57,9 @@ const Home = () => {
         containerClass="container mx-auto h-full"
         itemClass="carousel__item"
       >
-        <CarrouselItem text="Escribe el nombre de las personas que van a participar" SVG={FormExample} />
-        <CarrouselItem text="Team Maker se encarga de mezclarlos aleatoriamente" SVG={RandomExample} />
-        <CarrouselItem text="Comparte el resultado en donde quieras" SVG={ShareExample} />
+        <CarrouselItem text="Escribe el nombre de las personas que van a participar" SVGIcon={FormExample} />
+        <CarrouselItem text="Team Maker se encarga de mezclarlos aleatoriamente" SVGIcon={RandomExample} />
+        <CarrouselItem text="Comparte el resultado en donde quieras" SVGIcon={ShareExample} />
       </Carousel>
       <section className="flex flex-col h-full">
         <div className="relative">
@@ -91,6 +81,20 @@ const Home = () => {
       </section>
     </div>
   );
+};
+
+const CarrouselItem = ({ SVGIcon, text }) => (
+  <>
+    <div className="flex items-end justify-center h-full">
+      <SVGIcon className="w-full h-auto object-cover md:w-9/12" />
+    </div>
+    <p className="font-sans text-center text-xl">{text}</p>
+  </>
+);
+
+CarrouselItem.propTypes = {
+  SVGIcon: PropTypes.any,
+  text: PropTypes.any,
 };
 
 export default Home;

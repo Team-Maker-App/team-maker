@@ -35,12 +35,6 @@ export const trucanteString = (str, maxChar) => {
   return str;
 };
 
-// Arrays
-
-export function randomizePlayers(players) {
-  return players.sort(() => Math.random() - 0.5);
-}
-
 // Files
 
 export function dataURLtoFile(dataurl, filename) {

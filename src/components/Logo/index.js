@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import * as React from "react";
 
 function Logo({ dark, ...props }) {
@@ -10,5 +11,9 @@ function Logo({ dark, ...props }) {
     </svg>
   );
 }
+
+Logo.propTypes = {
+  dark: PropTypes.any,
+};
 
 export default Logo;

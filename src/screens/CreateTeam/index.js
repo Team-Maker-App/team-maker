@@ -16,7 +16,7 @@ const CreateTeam = () => {
   const history = useHistory();
 
   const handlePaste = () => {
-    navigator.clipboard.readText().then((clipText) => {
+    navigator?.clipboard?.readText().then((clipText) => {
       handlePlayers(clipText);
     });
   };
@@ -35,13 +35,13 @@ const CreateTeam = () => {
 
   return (
     <Layout>
-      <div className="flex flex-col p-5 gap-6 max-w-screen-xl mx-auto w-full">
+      <div className="flex flex-col p-5 gap-5 max-w-screen-xl mx-auto w-full">
         <div className="flex flex-col flex-auto w-full relative" style={{ maxHeight: "400px" }}>
           <textarea
             className="p-4 w-full flex-1 rounded-md resize-none"
             onChange={(e) => handlePlayers(e.target.value)}
             value={value}
-            placeholder={`Jugador1\nJugador2\nJugador3\nJugador4\nJugador5 ...`}
+            placeholder={`1. Pedro\n2. Flor\n3. Juan \n4. Sylvie\n5. Chloe ...`}
           />
           <div className="flex gap-x-2 absolute bottom-5 right-5">
             <div
