@@ -8,6 +8,7 @@ import Layout from "../../components/Layout";
 import DatePicker from "../../components/DatePicker";
 import Feedback from "../../components/Feedback/Feedback";
 import { shuffle } from "lodash";
+import Button from "../../components/Button";
 
 const CreateTeam = () => {
   const { location, setLocation, players, setPlayers } = matchStore();
@@ -86,14 +87,9 @@ const CreateTeam = () => {
         </div>
 
         <div className="flex justify-center w-full">
-          <button
-            disabled={players.length > 1 ? false : true}
-            type="submit"
-            onClick={() => CreateTeams()}
-            className="disabled:opacity-50 ml-3 inline-flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600 focus:outline-none"
-          >
+          <Button disabled={players.length > 1 ? false : true} type="submit" onClick={() => CreateTeams()}>
             Crear equipos
-          </button>
+          </Button>
         </div>
       </div>
       <div className="w-full text-center p-4 pin-b">

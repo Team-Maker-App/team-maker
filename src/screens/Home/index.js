@@ -10,7 +10,7 @@ import { ReactComponent as Isotipo } from "../../styles/svg/isotipo.svg";
 
 import { useHistory } from "react-router-dom";
 import Logo from "../../components/Logo";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Button";
 
 import Carousel from "react-multi-carousel";
 import WavyDivider from "../../components/WavyDivider";
@@ -70,11 +70,7 @@ const Home = () => {
             <Isotipo className="hidden md:block h-12" />
             <div className="flex gap-3">
               <InstallPWA />
-              <Button
-                text="Comenzar"
-                className="py-2 px-4 font-sans text-center text-xl text-primary"
-                action={navigate}
-              />
+              <Button onClick={navigate}>Comenzar</Button>
             </div>
           </div>
         </div>

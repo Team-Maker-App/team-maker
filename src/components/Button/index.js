@@ -1,11 +1,18 @@
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
+import "./styles.scss";
 
-const Button = ({text, share}) => {
+const Button = ({ children, ...props }) => {
   return (
-    <button className="rounded-full py-1 bg-white w-36" onClick={() => share()} >
-      {text}
+    <button className="button" {...props}>
+      {children}
     </button>
   );
+};
+
+Button.propTypes = {
+  action: PropTypes.func,
+  children: PropTypes.any,
 };
 
 export default Button;

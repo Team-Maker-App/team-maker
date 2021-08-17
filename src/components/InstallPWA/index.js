@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Button from "../Button/Button";
+import Button from "../Button";
 import { ImDownload } from "react-icons/im";
 
 const InstallPWA = () => {
@@ -43,7 +43,7 @@ const InstallPWA = () => {
   }
   return (
     <>
-      <Button className="px-6" aria-label="Install app" title="Install app" action={handleInstall}>
+      <Button onClick={handleInstall}>
         <ImDownload size={20} color="#171F6D" />
       </Button>
     </>

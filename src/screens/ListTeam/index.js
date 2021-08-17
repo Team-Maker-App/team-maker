@@ -10,7 +10,7 @@ import { dataURLtoFile } from "../../helpers";
 
 // Components
 import Alert from "../../components/Alert/Alert";
-import Button from "../../components/Button/Button";
+import Button from "../../components/Button";
 import Layout from "../../components/Layout";
 import ShareIcon from "../../components/Icons/ShareIcon";
 import Logo from "../../components/Logo";
@@ -145,10 +145,10 @@ const ListTeam = () => {
           <Alert text={listTeamStrings.position} />
         </div>
         <div className="flex justify-center items-center">
-          <Button action={handleOnClick}>
+          <Button onClick={handleOnClick}>
             <div className="flex gap-4 w-full justify-center items-center px-6">
-              <span className="text-gray-800">Compartir</span>
-              <ShareIcon className="w-4 h-4 text-primary" />
+              <span>Compartir</span>
+              <ShareIcon className="w-4 h-4" />
             </div>
           </Button>
         </div>
