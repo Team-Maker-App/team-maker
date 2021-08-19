@@ -1,0 +1,11 @@
+@use "src/sass/mixins";
+
+.shared {
+  width: 650px;
+  height: min-content;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+}

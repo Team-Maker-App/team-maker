@@ -1,31 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import ReactDOMServer from "react-dom/server";
+import "./styles.scss";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/esm/locale";
-import html2canvas from "html2canvas";
 import { matchStore } from "../../store";
-import { dataURLtoFile } from "../../helpers";
 
 // Components
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button";
 import Layout from "../../components/Layout";
 import ShareIcon from "../../components/Icons/ShareIcon";
-import Logo from "../../components/Logo";
 import Feedback from "../../components/Feedback/Feedback";
 import PlayersList from "./PlayersList";
 import { shuffle } from "lodash";
 import { AnimateSharedLayout, motion } from "framer-motion";
+import { generateShareImage } from "./generateShareImage";
 
 const ListTeam = () => {
   const content = useRef();
   const history = useHistory();
   const { location, players, date } = matchStore();
-
-  const [isCapturing, setIsCapturing] = useState(false);
   const [names, setNames] = useState(players);
+
   const [shuffling, setShuffling] = useState(true);
 
   const half = Math.ceil(players?.length / 2);
@@ -40,51 +37,12 @@ const ListTeam = () => {
   }, [history, players.length]);
 
   useEffect(() => {
-    if (shuffling) setTimeout(() => setNames(shuffle(names)), 600);
+    if (shuffling) setTimeout(() => setNames(shuffle(names)), 500);
   }, [names, shuffling]);
 
   useEffect(() => {
-    setTimeout(() => setShuffling(false), 3600);
+    setTimeout(() => setShuffling(false), 1500);
   }, []);
-
-  const handleOnClick = async () => {
-    setIsCapturing(true);
-
-    setTimeout(async () => {
-      const canvas = await html2canvas(content.current, {
-        allowTaint: true,
-        removeContainer: true,
-        backgroundColor: "#171f6d",
-        width: 550,
-        windowWidth: 550,
-
-        onclone: (clone) => {
-          const content = clone.querySelector(".screenshot");
-          const logo = (
-            <div className="w-full flex justify-center">
-              <Logo width={200} dark />
-            </div>
-          );
-          const stringComponent = ReactDOMServer.renderToString(logo);
-
-          content.insertAdjacentHTML("afterbegin", stringComponent);
-        },
-      });
-
-      const imgData = canvas.toDataURL("image/jpeg", 0.6);
-      const file = dataURLtoFile(imgData, "photo.jpg");
-
-      if (navigator.share) {
-        await navigator.share({
-          title: "Team Maker",
-          text: "Compartido desde Team Maker",
-          url: "https://teammaker.app/",
-          files: [file],
-        });
-      }
-      setIsCapturing(false);
-    }, 300);
-  };
 
   const variants = {
     idle: { x: 0, rotate: [-0.5, 0.5, -0.4, 0.4, -0.2, 0.2, 0], transition: { type: "spring" } },
@@ -99,8 +57,12 @@ const ListTeam = () => {
     },
   };
 
+  const handleShare = () => {
+    generateShareImage(content.current);
+  };
+
   return (
-    <Layout capturing={isCapturing}>
+    <Layout>
       <div className="flex flex-col">
         <div className="screenshot flex flex-col gap-5 p-4" ref={content}>
           <div className="col-span-1 flex shadow-sm rounded-md w-full mx-auto">
@@ -145,7 +107,7 @@ const ListTeam = () => {
           <Alert text={listTeamStrings.position} />
         </div>
         <div className="flex justify-center items-center">
-          <Button onClick={handleOnClick}>
+          <Button onClick={handleShare} disabled={shuffling}>
             <div className="flex gap-4 w-full justify-center items-center px-6">
               <span>Compartir</span>
               <ShareIcon className="w-4 h-4" />
