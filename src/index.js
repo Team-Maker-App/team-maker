@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import "./sass/theme.scss";
+import "./sass/main.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReactPWAInstallProvider from "react-pwa-install";

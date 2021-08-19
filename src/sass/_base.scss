@@ -1,0 +1,21 @@
+@use "src/sass/mixins";
+
+.background {
+  background: linear-gradient(180deg, #2c3590 0%, #171f6d 100%);
+}
+
+.container {
+  margin: 0 auto !important;
+  width: 100%;
+
+  @include mixins.responsive(mobile) {
+    width: 95%;
+    max-width: 570px;
+  }
+  @include mixins.responsive(tablet) {
+    max-width: 860px;
+  }
+  @include mixins.responsive(desktop) {
+    max-width: 1150px;
+  }
+}

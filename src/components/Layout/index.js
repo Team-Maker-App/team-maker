@@ -6,6 +6,7 @@ import Logo from "../Logo";
 // Components
 import SpinnerIcon from "../../components/Icons/SpinnerIcon";
 import InstallPWA from "../../components/InstallPWA";
+import cx from "classnames";
 
 const LayoutFunction = ({ children, capturing }, ref) => {
   useEffect(() => {
@@ -13,14 +14,12 @@ const LayoutFunction = ({ children, capturing }, ref) => {
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }, []);
 
+  const layoutClasses = cx("layout container background", {
+    capturing,
+  });
+
   return (
-    <div
-      ref={ref}
-      style={{
-        width: capturing ? "550px" : "auto",
-      }}
-      className={`layout background ${capturing ? "" : "container mx-auto"}`}
-    >
+    <div ref={ref} className={layoutClasses}>
       <div className="grid place-items-center h-full w-full bg-primaryDark shadow-xl relative">
         <Logo width={150} dark />
         <div className="absolute right-4">
