@@ -5,6 +5,9 @@ import { useHistory } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/esm/locale";
 import { matchStore } from "../../store";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // Components
 import Alert from "../../components/Alert/Alert";
@@ -42,6 +45,10 @@ const ListTeam = () => {
 
   useEffect(() => {
     setTimeout(() => setShuffling(false), 1500);
+  }, []);
+
+  useEffect(() => {
+    toast("Mezclando 🎲");
   }, []);
 
   const variants = {
@@ -114,6 +121,15 @@ const ListTeam = () => {
             </div>
           </Button>
         </div>
+        <ToastContainer position="bottom-center"
+          autoClose={2500}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover />
       </div>
       <div className="w-full text-center p-4 pin-b">
         <Feedback />
