@@ -9,7 +9,7 @@ import Home from "./screens/Home";
 function App() {
   return (
     <Router>
-      <div className="w-full bg-primaryDark">
+      <div className="app">
         <Route path="/" exact component={Home} />
         <Route path="/create" exact component={CreateTeam} />
         <Route path="/list" component={ListTeam} />

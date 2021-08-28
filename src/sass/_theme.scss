@@ -1,7 +1,11 @@
 :root {
-  --primary: hsl(235, 53%, 40%);
-  --primary-light: hsl(235, 53%, 50%);
-  --primary-dark: hsl(235, 53%, 30%);
+  --primary: #7f5af0;
+  --primary-dark: #171f6d;
+  --secondary: #2dd4bf;
+  --accent: #e45858;
 
-  --white: hsl(0, 100%, 100%);
+  --background: #16161a;
+  --background-secondary: #242629;
+  --headline: #fffffe;
+  --paragraph: #94a1b2;
 }

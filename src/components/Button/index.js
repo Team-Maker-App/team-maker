@@ -1,10 +1,16 @@
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
 import "./styles.scss";
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, variant = "primary", ...props }) => {
+  const btnClasses = classNames("button", {
+    primary: variant === "primary",
+    secondary: variant === "secondary",
+  });
+
   return (
-    <button className="button" {...props}>
+    <button className={btnClasses} {...props}>
       {children}
     </button>
   );
@@ -13,6 +19,7 @@ const Button = ({ children, ...props }) => {
 Button.propTypes = {
   action: PropTypes.func,
   children: PropTypes.any,
+  variant: PropTypes.string,
 };
 
 export default Button;

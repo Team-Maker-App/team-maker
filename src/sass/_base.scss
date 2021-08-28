@@ -5,8 +5,8 @@ html {
   line-height: 1.5;
 }
 
-.background {
-  background: linear-gradient(180deg, #2c3590 0%, #171f6d 100%);
+.app {
+  background: var(--primary-dark);
 }
 
 .container {
@@ -15,12 +15,11 @@ html {
 
   @include mixins.responsive(mobile) {
     width: 95%;
-    max-width: 570px;
   }
   @include mixins.responsive(tablet) {
-    max-width: 860px;
+    max-width: 900px;
   }
   @include mixins.responsive(desktop) {
-    max-width: 1150px;
+    max-width: 1200px;
   }
 }

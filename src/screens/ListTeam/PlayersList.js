@@ -5,11 +5,12 @@ import ShirtIcon from "../../components/Icons/ShirtIcon";
 import { trucanteString } from "../../helpers";
 
 const PlayersList = ({ players = [], color }) => {
+  console.log("🚀 ~ PlayersList ~ players", players);
   return (
     <div className="relative w-1/2 bg-white rounded-md p-2">
       <ShirtIcon color={color} />
       <ul className="divide-y divide-gray-200">
-        {players.map((player) => (
+        {players?.map((player) => (
           <motion.li
             layout
             key={player}

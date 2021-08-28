@@ -245,30 +245,6 @@ video {
   border-color: rgba(228, 228, 231, var(--tw-border-opacity));
 }
 
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
 .absolute {
   position: absolute;
 }
@@ -583,21 +559,6 @@ video {
   background-color: rgba(187, 247, 208, var(--tw-bg-opacity));
 }
 
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgba(44, 53, 144, var(--tw-bg-opacity));
-}
-
-.bg-primaryDark {
-  --tw-bg-opacity: 1;
-  background-color: rgba(23, 31, 109, var(--tw-bg-opacity));
-}
-
-.bg-primaryDesktop {
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-}
-
 .hover\:bg-indigo-700:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(67, 56, 202, var(--tw-bg-opacity));
@@ -865,30 +826,6 @@ video {
   background: linear-gradient(180deg, #2c3590, #171f6d);
 }
 
-.container {
-  margin: 0 auto !important;
-  width: 100%;
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 95%;
-    max-width: 570px;
-  }
-}
-
-@media (max-width: 992px) {
-  .container {
-    max-width: 860px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .container {
-    max-width: 1150px;
-  }
-}
-
 .layout {
   display: grid;
   grid-template-rows: 60px 1fr 60px;
@@ -898,32 +835,6 @@ video {
 
 .layout .capturing {
   width: 550px !important;
-}
-
-.button {
-  align-items: center;
-  background-color: var(--primary);
-  border-color: #cbd5e0;
-  border-radius: 0.4rem;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  color: var(--white);
-  display: inline-flex;
-  justify-content: center;
-  opacity: 1;
-  padding: 0.5rem 0.7rem;
-  transition: background-color 0.5s ease-in-out;
-  transition: opacity 0.5s ease-in-out;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.button:hover {
-  background-color: var(--primary-light);
-}
-
-.button:disabled {
-  opacity: 0.3;
 }
 
 .react-datepicker__day--selected {

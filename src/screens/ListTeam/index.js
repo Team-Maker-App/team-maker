@@ -2,12 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useHistory } from "react-router-dom";
-import { format } from "date-fns";
-import { es } from "date-fns/esm/locale";
-import { matchStore } from "../../store";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { matchStore } from "store";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Components
 import Alert from "../../components/Alert/Alert";
@@ -19,25 +16,26 @@ import PlayersList from "./PlayersList";
 import { shuffle } from "lodash";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import { generateShareImage } from "./generateShareImage";
+import ListHead from "./ListHead";
 
 const ListTeam = () => {
   const content = useRef();
   const history = useHistory();
-  const { location, players, date } = matchStore();
-  const [names, setNames] = useState(players);
+  const store = matchStore();
+  const [names, setNames] = useState(store.players);
 
   const [shuffling, setShuffling] = useState(true);
 
-  const half = Math.ceil(players?.length / 2);
+  const half = Math.ceil(store.players?.length / 2);
 
   const firstHalf = names?.slice(0, half);
   const secondHalf = names?.slice(-half);
 
   useEffect(() => {
-    if (players.length === 0) {
+    if (store.players.length === 0) {
       history.push("/create");
     }
-  }, [history, players.length]);
+  }, [history, store.players.length]);
 
   useEffect(() => {
     if (shuffling) setTimeout(() => setNames(shuffle(names)), 500);
@@ -72,30 +70,8 @@ const ListTeam = () => {
     <Layout>
       <div className="flex flex-col">
         <div className="screenshot flex flex-col gap-5 p-4" ref={content}>
-          <div className="col-span-1 flex shadow-sm rounded-md w-full mx-auto">
-            <div className="flex-shrink-0 flex items-center justify-center w-16 bg-purple-600 text-white text-sm font-medium rounded-l-md">
-              <svg width={30} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-            <div className="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-              <div className="flex-1 px-4 py-2 text-sm truncate">
-                <p className="text-gray-900 font-medium hover:text-gray-600">{location}</p>
-                <p className="text-gray-500 capitalize">
-                  {format(date, "EEEE dd/MM - p", {
-                    locale: es,
-                  })}
-                  hs
-                </p>
-                <p className="text-gray-500">{players?.length} Jugadores</p>
-              </div>
-            </div>
-          </div>
+          <ListHead {...store} />
+
           <AnimateSharedLayout>
             <motion.div
               initial="idle"
@@ -111,7 +87,7 @@ const ListTeam = () => {
               <PlayersList players={secondHalf} color="#2C3590" />
             </motion.div>
           </AnimateSharedLayout>
-          <Alert text={listTeamStrings.position} />
+          <Alert text="La posición de los jugadores no determina el orden en que atajan." />
         </div>
         <div className="flex justify-center items-center">
           <Button onClick={handleShare} disabled={shuffling}>
@@ -121,7 +97,8 @@ const ListTeam = () => {
             </div>
           </Button>
         </div>
-        <ToastContainer position="bottom-center"
+        <ToastContainer
+          position="bottom-center"
           autoClose={2500}
           hideProgressBar={false}
           newestOnTop={false}
@@ -129,17 +106,14 @@ const ListTeam = () => {
           rtl={false}
           pauseOnFocusLoss
           draggable
-          pauseOnHover />
+          pauseOnHover
+        />
       </div>
       <div className="w-full text-center p-4 pin-b">
         <Feedback />
       </div>
     </Layout>
   );
-};
-
-const listTeamStrings = {
-  position: "La posición de los jugadores no determina el orden en que atajan.",
 };
 
 export default ListTeam;

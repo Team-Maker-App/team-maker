@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home bg-primaryDesktop">
+    <div className="home container">
       <section className="flex justify-center items-center h-full">
         <Logo height={30} />
       </section>
@@ -65,7 +65,7 @@ const Home = () => {
         <div className="relative">
           <WavyDivider className="w-full" />
         </div>
-        <div className="w-full h-full pb-0 pt-2 md:p-2 bg-primaryDark ">
+        <div className="home__footer">
           <div className="flex items-center container mx-auto h-full md:justify-between justify-end px-12 sm:px-0">
             <Isotipo className="hidden md:block h-12" />
             <div className="flex gap-3">

@@ -45,25 +45,9 @@ const CreateTeam = () => {
             placeholder={`1. Pedro\n2. Flor\n3. Juan \n4. Sylvie\n5. Chloe ...`}
           />
           <div className="flex gap-x-2 absolute bottom-5 right-5">
-            <div
-              className={`grid place-items-center h-12 w-12 rounded-md shadow-sm text-sm font-medium text-white bg-teal-400 hover:bg-teal-500 focus:outline-none transition-opacity duration-200 ease-in-out ${
-                players.length > 0 ? "opacity-100" : "opacity-0"
-              }`}
-            >
-              <span className=" text-2xl">{players.length > 0 ? players.length : ""}</span>
-            </div>
-            <button
-              onClick={() => handlePaste()}
-              type="button"
-              className="grid place-items-center h-12 w-12 rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-indigo-700 focus:outline-none"
-            >
-              <svg
-                className="h-5 w-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+            <Button variant="secondary">{players.length}</Button>
+            <Button onClick={() => handlePaste()}>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -71,7 +55,7 @@ const CreateTeam = () => {
                   d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
                 />
               </svg>
-            </button>
+            </Button>
           </div>
         </div>
         <p className="text-white font-sans">Datos del partido</p>
