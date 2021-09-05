@@ -1,7 +1,9 @@
 import app from "./firebase";
-import { getFirestore, collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { getFirestore, collection, getDocs, getDoc, doc, onSnapshot } from "firebase/firestore";
 
 const db = getFirestore(app);
+
+// One-time database petitions
 
 export const getMatches = async () => {
   const matches = collection(db, "matches");
@@ -10,8 +12,16 @@ export const getMatches = async () => {
   return matchesList;
 };
 
-export const getMatchById = async (id) => {
+// Real-time database subscriptions
+
+export const subscribeByMatchId = async (id, callback) => {
   const docRef = doc(db, "matches", id);
   const docSnap = await getDoc(docRef);
-  return docSnap.data();
+
+  onSnapshot(docRef, (doc) => {
+    const data = doc.data();
+    callback(data);
+  });
+
+  return docSnap.exists();
 };

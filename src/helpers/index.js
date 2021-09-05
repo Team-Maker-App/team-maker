@@ -1,5 +1,8 @@
 // Strings
 
+import { format } from "date-fns";
+import es from "date-fns/esm/locale/es/index.js";
+
 export function filterPlayers(str) {
   const regex = /[a-zÀ-ÿ\s]+/gi;
 
@@ -53,5 +56,6 @@ export function dataURLtoFile(dataurl, filename) {
 
 // Convert from firebase timestamp to Date
 export function convertTimestampToDate(timestamp) {
-  return new Date(timestamp.toDate());
+  const date = new Date(timestamp.toDate());
+  return `${format(date, "EEEE dd/MM - p", { locale: es })} hs`;
 }

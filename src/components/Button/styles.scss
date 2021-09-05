@@ -1,12 +1,10 @@
-@use "src/sass/variables";
-
 .button {
   min-width: 40px;
 
   position: relative;
   align-items: center;
   border-color: rgba(203, 213, 224, 1);
-  border-radius: variables.$radius;
+  border-radius: var(--radius);
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 
   display: inline-flex;
