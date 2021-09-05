@@ -1,18 +1,13 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-// Components
+import { BrowserRouter as Router } from "react-router-dom";
 
-import CreateTeam from "./screens/CreateTeam";
-import ListTeam from "./screens/ListTeam";
-import Home from "./screens/Home";
+import MainRouter from "routes";
 
 function App() {
   return (
     <Router>
       <div className="app">
-        <Route path="/" exact component={Home} />
-        <Route path="/create" exact component={CreateTeam} />
-        <Route path="/list" component={ListTeam} />
+        <MainRouter />
       </div>
     </Router>
   );

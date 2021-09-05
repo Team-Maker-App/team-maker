@@ -48,3 +48,10 @@ export function dataURLtoFile(dataurl, filename) {
   }
   return new File([u8arr], filename, { type: mime });
 }
+
+// Dates
+
+// Convert from firebase timestamp to Date
+export function convertTimestampToDate(timestamp) {
+  return new Date(timestamp.toDate());
+}

@@ -1,0 +1,16 @@
+@use "src/sass/mixins";
+
+.shared {
+  width: 650px;
+  height: min-content;
+
+  &__header {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/** Classes for the progress bar **/
+.Toastify__progress-bar.Toastify__progress-bar--default{
+  background: #2C3590;
+}

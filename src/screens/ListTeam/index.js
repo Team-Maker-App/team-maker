@@ -70,7 +70,7 @@ const ListTeam = () => {
     <Layout>
       <div className="flex flex-col">
         <div className="screenshot flex flex-col gap-5 p-4" ref={content}>
-          <ListHead {...store} />
+          <ListHead maxPlayers={store.players.length} location={store.location} date={store.date} />
 
           <AnimateSharedLayout>
             <motion.div
