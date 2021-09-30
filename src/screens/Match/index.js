@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import "./styles.scss";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useParams, useHistory } from "react-router-dom";

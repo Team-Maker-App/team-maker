@@ -16,6 +16,7 @@ module.exports = {
   plugins: ["react", "jsx-a11y", "react-hooks"],
   rules: {
     eqeqeq: 2,
+    "react/react-in-jsx-scope": 0,
     "react/display-name": 2,
     "react/jsx-key": 2,
     "react/jsx-no-undef": 2,

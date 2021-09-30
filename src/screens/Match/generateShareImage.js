@@ -1,5 +1,4 @@
-import React from "react";
-import ReactDOMServer from "react-dom/server";
+import { renderToString } from "react-dom/server";
 import Logo from "../../components/Logo";
 import html2canvas from "html2canvas";
 import { dataURLtoFile } from "../../helpers";
@@ -28,7 +27,7 @@ export const generateShareImage = async (component) => {
           <Logo width={200} dark />
         </div>
       );
-      const stringComponent = ReactDOMServer.renderToString(logo);
+      const stringComponent = renderToString(logo);
 
       return content.insertAdjacentHTML("afterbegin", stringComponent);
     },

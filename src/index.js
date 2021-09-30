@@ -1,17 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import { StrictMode } from "react";
+import { render } from "react-dom";
 import "./sass/main.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ReactPWAInstallProvider from "react-pwa-install";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-ReactDOM.render(
-  <React.StrictMode>
+render(
+  <StrictMode>
     <ReactPWAInstallProvider enableLogging>
       <App />
     </ReactPWAInstallProvider>
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById("root")
 );
 

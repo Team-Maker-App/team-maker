@@ -1,6 +1,5 @@
-import React from 'react';
-import {ReactComponent as EmailIcon} from '../../styles/svg/Mail.svg';
-import {ReactComponent as TwitterIcon} from '../../styles/svg/twitter.svg';
+import { ReactComponent as EmailIcon } from "../../styles/svg/Mail.svg";
+import { ReactComponent as TwitterIcon } from "../../styles/svg/twitter.svg";
 
 const Feedback = () => {
   return (
@@ -17,7 +16,7 @@ const Feedback = () => {
         </a>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Feedback;

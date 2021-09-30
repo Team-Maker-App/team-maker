@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./styles.scss";
 import { ReactComponent as Versus } from "../../versus.svg";
 import { useHistory } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { matchStore } from "../../store";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
