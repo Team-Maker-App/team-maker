@@ -3,7 +3,7 @@ import Logo from "../../components/Logo";
 import html2canvas from "html2canvas";
 import { dataURLtoFile } from "../../helpers";
 
-export const generateShareImage = async (component) => {
+export const generateShareImage = async (component, matchURL) => {
   const canvas = await html2canvas(component, {
     allowTaint: true,
     removeContainer: true,
@@ -41,7 +41,7 @@ export const generateShareImage = async (component) => {
       await navigator.share({
         title: "Team Maker",
         text: "Compartido desde Team Maker",
-        url: "https://teammaker.app/",
+        url: matchURL,
         files: [file],
       });
     }

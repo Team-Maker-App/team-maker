@@ -11,7 +11,7 @@ import { shuffle } from "lodash";
 import Button from "../../components/Button";
 
 const CreateTeam = () => {
-  const { location, setLocation, players, setPlayers } = matchStore();
+  const { location, setLocation, players, setPlayers, creator, setCreator, setMaxPlayers, max_players } = matchStore();
   const [persistLocation, setPersistLocation] = useLocalStorage("match-location", location);
   const [value, setValue] = useState("");
   const history = useHistory();
@@ -66,6 +66,20 @@ const CreateTeam = () => {
             placeholder="Lugar"
             onChange={(e) => setPersistLocation(e.target.value)}
             value={persistLocation}
+          />
+          <input
+            type="text"
+            className="w-full rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
+            placeholder="Creador"
+            onChange={(e) => setCreator(e.target.value)}
+            value={creator}
+          />
+          <input
+            type="text"
+            className="w-full rounded-md h-full p-2 block shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm border-gray-300"
+            placeholder="Creador"
+            onChange={(e) => setMaxPlayers(e.target.value)}
+            value={max_players}
           />
           <DatePicker />
         </div>

@@ -5,12 +5,14 @@ import { useHistory } from "react-router-dom";
 import { matchStore } from "store";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getFirestore, addDoc, collection } from "firebase/firestore";
+import app from '../../services/firebase';
 
 // Components
 import Alert from "../../components/Alert/Alert";
 import Button from "../../components/Button";
 import Layout from "../../components/Layout";
-import ShareIcon from "../../components/Icons/ShareIcon";
+import CheckIcon from "../../components/Icons/CheckIcon";
 import Feedback from "../../components/Feedback/Feedback";
 import PlayersList from "./PlayersList";
 import { shuffle } from "lodash";
@@ -19,23 +21,25 @@ import { generateShareImage } from "./generateShareImage";
 import ListHead from "./ListHead";
 
 const ListTeam = () => {
+  const db = getFirestore(app);
   const content = useRef();
   const history = useHistory();
   const store = matchStore();
-  const [names, setNames] = useState(store.players);
+  const {players, date, location, creator} = matchStore();
+  const [names, setNames] = useState(players);
 
   const [shuffling, setShuffling] = useState(true);
 
-  const half = Math.ceil(store.players?.length / 2);
+  const half = Math.ceil(players?.length / 2);
 
   const firstHalf = names?.slice(0, half);
   const secondHalf = names?.slice(-half);
 
-  useEffect(() => {
-    if (store.players.length === 0) {
+    useEffect(() => {
+    if (players.length === 0) {
       history.push("/create");
     }
-  }, [history, store.players.length]);
+  }, [history, players.length]);
 
   useEffect(() => {
     if (shuffling) setTimeout(() => setNames(shuffle(names)), 500);
@@ -62,15 +66,27 @@ const ListTeam = () => {
     },
   };
 
-  const handleShare = () => {
-    generateShareImage(content.current);
+  const handleShare = async () => {
+    const create = await addDoc(collection(db, "matches"), {
+      admin: creator,
+      date: date,
+      location: location,
+      max_players: players.length,
+      teams: {A: firstHalf, B: secondHalf}
+    })
+
+    if (create.id) {
+      let matchURL = `/match/${create.id}`;
+      generateShareImage(content.current, matchURL);
+      history.push({ pathname:  matchURL})
+    }
   };
 
   return (
     <Layout>
       <div className="flex flex-col">
         <div className="screenshot flex flex-col gap-5 p-4" ref={content}>
-          <ListHead maxPlayers={store.players.length} location={store.location} date={store.date} />
+          <ListHead maxPlayers={players.length} location={location} date={date} />
 
           <AnimateSharedLayout>
             <motion.div
@@ -92,8 +108,8 @@ const ListTeam = () => {
         <div className="flex justify-center items-center">
           <Button onClick={handleShare} disabled={shuffling}>
             <div className="flex gap-4 w-full justify-center items-center px-6">
-              <span>Compartir</span>
-              <ShareIcon className="w-4 h-4" />
+              <span>Listo</span>
+              <CheckIcon className="w-4 h-4" />
             </div>
           </Button>
         </div>
