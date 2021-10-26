@@ -24,7 +24,6 @@ const ListTeam = () => {
   const db = getFirestore(app);
   const content = useRef();
   const history = useHistory();
-  const store = matchStore();
   const {players, date, location, creator} = matchStore();
   const [names, setNames] = useState(players);
 
